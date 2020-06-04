@@ -14,6 +14,7 @@
 		while (rs.next()) {
 			String number = rs.getString("categoryid");
 			String s = rs.getString("categoryname");
+			//teset
 	%>
 
 	<p><%=number%></p>
