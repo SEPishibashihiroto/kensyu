@@ -23,7 +23,7 @@
 	<p>
 		電話番号：<%=tel%></p>
 
-	<form action="./AddCommit" method="get">
+	<form action="./AddCommitBL">
 		<input type="submit" value="登録">
 	</form>
 

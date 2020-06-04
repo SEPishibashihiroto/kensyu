@@ -9,16 +9,10 @@
 </head>
 <body>
 	<%
-		Common common = new Common();
-		ResultSet rs = common.getCategoryAll();
-		while (rs.next()) {
-			String number = rs.getString("categoryid");
-			String s = rs.getString("categoryname");
-			//teset
+		String tel = "123-4567-8900";
+		if (!(tel.length() > 0 && tel.matches("^\\\\d{3}-\\d{4}-\\d{4}$"))) {
 	%>
-
-	<p><%=number%></p>
-	<p><%=s%></p>
+	<p>OK</p>
 	<%
 		}
 	%>

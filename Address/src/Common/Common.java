@@ -7,9 +7,9 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class Common {
-	static final String URL = "jdbc:mysql://localhost:3306/address?serverTimezone=JST";
+	static final String URL = "jdbc:mysql://localhost:3306/ishibashi?serverTimezone=JST";
 	static final String USERNAME = "root";
-	static final String PASSWORD = "ishi1196";
+	static final String PASSWORD = "";
 
 	public static String getErr(String name, String address, String tel) {
 		final String ERRMSG_NAME01 = "名前は全角20文字以内で入力してください";
@@ -26,7 +26,7 @@ public class Common {
 			returnVal = ERRMSG_ADDRESS01 + "<br>";
 		} else if (address.length() == 0) {
 			returnVal = ERRMSG_ADDRESS02 + "<br>";
-		} else if (!(tel.length() > 0 && tel.matches("^\\\\d{3}-\\d{4}-\\d{4}$"))) {
+		} else if (!(tel.length() > 0 && tel.matches("^\\d{3}-\\d{4}-\\d{4}$"))) {
 			returnVal = ERRMSG_TEL01 + "<br>";
 		}
 		return returnVal;

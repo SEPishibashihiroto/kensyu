@@ -2,7 +2,9 @@ package BL;
 
 import java.io.IOException;
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 
 import javax.servlet.ServletException;
@@ -17,6 +19,9 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/AddCommitBL")
 public class AddCommitBL extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	static final String URL = "jdbc:mysql://localhost:3306/ishibashi?serverTimezone=JST";
+	static final String USERNAME = "root";
+	static final String PASSWORD = "";
 
 	/**
 	 * @see HttpServlet#HttpServlet()
@@ -42,7 +47,22 @@ public class AddCommitBL extends HttpServlet {
 		String categoryid = request.getParameter("categoryid");
 
 		tel = tel.replace("-", "");
-		System.out.println(tel);
+
+		InsQuery = "insert into `jyusyoroku` (`id`, `name`, `address`, `tel`, `categoryid`, `delete_flg`) values (null, '"
+				+ name + "', '" + address + "', '" + tel + "', '" + categoryid + "', '0');";
+
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			connect = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+			stmt = connect.createStatement();
+			rs = stmt.executeQuery(InsQuery);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+
+		getServletContext().getRequestDispatcher("/ListBL").forward(request, response);
 	}
 
 	/**

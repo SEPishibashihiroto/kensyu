@@ -36,9 +36,20 @@
 <body>
 	<h1>住所録管理システム：住所録登録</h1>
 	<br>
+	<%
+		if (errmsg == null) {
+	%>
+	<h2></h2>
+	<%
+		} else {
+	%>
 	<h2>
 		※<%=errmsg%>
 	</h2>
+	<%
+		}
+	%>
+
 
 	<form action="./AddBL" method="get">
 		<p>

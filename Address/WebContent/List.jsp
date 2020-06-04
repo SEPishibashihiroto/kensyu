@@ -44,8 +44,12 @@
 			<td><%=address%></td>
 			<td><%=tel%></td>
 			<td><%=cname%></td>
-			<td>編集</td>
-			<td>削除</td>
+			<td><form action="Add.jsp">
+					<input type="submit" value="編集">
+				</form></td>
+			<td><form action="Add.jsp">
+					<input type="submit" value="削除">
+				</form></td>
 		</tr>
 
 		<%

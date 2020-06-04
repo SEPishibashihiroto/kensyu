@@ -20,9 +20,9 @@ import javax.servlet.http.HttpServletResponse;
 public class ListBL extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	static final String URL = "jdbc:mysql://localhost:3306/address?serverTimezone=JST";
+	static final String URL = "jdbc:mysql://localhost:3306/ishibashi?serverTimezone=JST";
 	static final String USERNAME = "root";
-	static final String PASSWORD = "ishi1196";
+	static final String PASSWORD = "";
 
 	/**
 	 * @see HttpServlet#HttpServlet()
@@ -38,7 +38,6 @@ public class ListBL extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		//response.getWriter().append("Served at: ").append(request.getContextPath());
 
 		String pagerq = request.getParameter("page");
 		String senarq = request.getParameter("SerchName");
@@ -69,11 +68,11 @@ public class ListBL extends HttpServlet {
 
 			if (senarq == null) {
 				SelectQuery = "select id,name,address,tel,categoryname from jyusyoroku join category on jyusyoroku.categoryid = category.categoryid where delete_flg = 0 limit "
-						+ limitSta + ";";
+						+ limitSta + "," + (limitSta + 10) + ";";
 			} else {
 				SerchName = "%" + senarq + "%";
 				SelectQuery = "select id,name,address,tel,categoryname from jyusyoroku join category on jyusyoroku.categoryid = category.categoryid where delete_flg = 0 address like "
-						+ SerchName + " limit " + limitSta + ";";
+						+ SerchName + " limit " + limitSta + "," + (limitSta + 10) + ";";
 			}
 			rs = stmt.executeQuery(SelectQuery);
 
@@ -84,9 +83,6 @@ public class ListBL extends HttpServlet {
 
 			getServletContext().getRequestDispatcher("/List.jsp").forward(request, response);
 
-			rs.close();
-			stmt.close();
-			connect.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} catch (ClassNotFoundException e) {
