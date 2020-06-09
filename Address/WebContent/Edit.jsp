@@ -30,6 +30,8 @@
 	<h1>住所録管理システム：住所録編集</h1>
 	<br>
 
+
+
 	<form action="./EditBL" method="get">
 		<input type="hidden" name="id" value="<%=id%>">
 		<p>

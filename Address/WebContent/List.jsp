@@ -19,6 +19,83 @@
 		<input type="submit" value="新規登録">
 	</form>
 
+	<%
+		if (Integer.parseInt(nowPage) == 1) {//1ページ目の処理
+	%>
+	<a href="ListBL?page=1"><%="<<　"%></a>
+	<%
+		for (int i = Integer.parseInt(nowPage); i <= maxPage && i <= Integer.parseInt(nowPage) + 2; i++) {
+				if (i == Integer.parseInt(nowPage)) {
+	%>
+	<a><%=i + " |　"%></a>
+	<%
+		} else {
+	%>
+	<a href="ListBL?page=<%=i%>"><%=i + " |　"%></a>
+	<%
+		}
+	%>
+
+	<%
+		}
+	%>
+	<a href="ListBL?page=<%=Integer.parseInt(nowPage) + 1%>"><%=">　"%></a>
+	<a href="ListBL?page=<%=maxPage%>"><%=">>　"%></a>
+
+	<%
+		} else if (Integer.parseInt(nowPage) == maxPage) {//最終ページの処理
+	%>
+	<a href="ListBL?page=1"><%="<<　"%></a>
+	<a href="ListBL?page=<%=Integer.parseInt(nowPage) - 1%>"><%="<　"%></a>
+	<%
+		int n = maxPage == 2 ? 1 : 2;
+			for (int i = Integer.parseInt(nowPage) - n; i <= Integer.parseInt(nowPage); i++) {
+				if (i == Integer.parseInt(nowPage)) {
+	%>
+	<a><%=i + " |　"%></a>
+	<%
+		} else {
+	%>
+	<a href="ListBL?page=<%=i%>"><%=i + " |　"%></a>
+	<%
+		}
+	%>
+	<%
+		}
+	%>
+
+	<a href="ListBL?page=<%=maxPage%>"><%=">>　"%></a>
+	<%
+		} else {//それ以外のページの処理
+	%>
+	<a href="ListBL?page=1"><%="<<　"%></a>
+	<a href="ListBL?page=<%=Integer.parseInt(nowPage) - 1%>"><%="<　"%></a>
+	<%
+		int n = Integer.parseInt(nowPage) == 2 ? 1 : 2;
+			for (int i = Integer.parseInt(nowPage) - n; i <= maxPage && i <= Integer.parseInt(nowPage) + 2; i++) {
+				if (i == Integer.parseInt(nowPage)) {
+	%>
+	<a><%=i + " |　"%></a>
+	<%
+		} else {
+	%>
+	<a href="ListBL?page=<%=i%>"><%=i + " |　"%></a>
+	<%
+		}
+	%>
+	<%
+		}
+	%>
+	<a
+		href="ListBL?page=<%=Integer.parseInt(nowPage) == maxPage ? maxPage : Integer.parseInt(nowPage) - 1%>"><%=">　"%></a>
+	<a href="ListBL?page=<%=maxPage%>"><%=">>　"%></a>
+	<%
+		}
+	%>
+
+
+
+
 
 	<table border="1">
 		<tr>
@@ -39,14 +116,21 @@
 		%>
 
 		<tr>
-			<td><%=id%><input type="hidden" name="id" value="<%=id%>"></td>
-			<td><%=name%><input type="hidden" name="name" value="<%=name%>"></td>
-			<td><%=address%><input type="hidden" name="sddress" value="<%=address%>"></td>
-			<td><%=tel%><input type="hidden" name="tel" value="<%=tel%>"></td>
-			<td><%=cname%><input type="hidden" name="category" value="<%=cname%>"></td>
-			<td><form action="Edit.jsp">
-					<input type="submit" value="編集">
-				</form></td>
+			<td><%=id%></td>
+			<td><%=name%></td>
+			<td><%=address%></td>
+			<td><%=tel%></td>
+			<td><%=cname%></td>
+			<td>
+				<form action="Edit.jsp">
+					<input type="hidden" name="id" value="<%=id%>"> <input
+						type="hidden" name="name" value="<%=name%>"> <input
+						type="hidden" name="sddress" value="<%=address%>"> <input
+						type="hidden" name="tel" value="<%=tel%>"> <input
+						type="hidden" name="category" value="<%=cname%>"> <input
+						type="submit" value="編集">
+				</form>
+			</td>
 			<td><form action="Add.jsp">
 					<input type="submit" value="削除">
 				</form></td>
@@ -57,5 +141,80 @@
 		%>
 
 	</table>
+
+	<%
+		if (Integer.parseInt(nowPage) == 1) {//1ページ目の処理
+	%>
+	<a href="ListBL?page=1"><%="<<　"%></a>
+	<%
+		for (int i = Integer.parseInt(nowPage); i <= maxPage && i <= Integer.parseInt(nowPage) + 2; i++) {
+				if (i == Integer.parseInt(nowPage)) {
+	%>
+	<a><%=i + " |　"%></a>
+	<%
+		} else {
+	%>
+	<a href="ListBL?page=<%=i%>"><%=i + " |　"%></a>
+	<%
+		}
+	%>
+
+	<%
+		}
+	%>
+	<a href="ListBL?page=<%=Integer.parseInt(nowPage) + 1%>"><%=">　"%></a>
+	<a href="ListBL?page=<%=maxPage%>"><%=">>　"%></a>
+
+	<%
+		} else if (Integer.parseInt(nowPage) == maxPage) {//最終ページの処理
+	%>
+	<a href="ListBL?page=1"><%="<<　"%></a>
+	<a href="ListBL?page=<%=Integer.parseInt(nowPage) - 1%>"><%="<　"%></a>
+	<%
+		int n = maxPage == 2 ? 1 : 2;
+			for (int i = Integer.parseInt(nowPage) - n; i <= Integer.parseInt(nowPage); i++) {
+				if (i == Integer.parseInt(nowPage)) {
+	%>
+	<a><%=i + " |　"%></a>
+	<%
+		} else {
+	%>
+	<a href="ListBL?page=<%=i%>"><%=i + " |　"%></a>
+	<%
+		}
+	%>
+	<%
+		}
+	%>
+
+	<a href="ListBL?page=<%=maxPage%>"><%=">>　"%></a>
+	<%
+		} else {//それ以外のページの処理
+	%>
+	<a href="ListBL?page=1"><%="<<　"%></a>
+	<a href="ListBL?page=<%=Integer.parseInt(nowPage) - 1%>"><%="<　"%></a>
+	<%
+		int n = Integer.parseInt(nowPage) == 2 ? 1 : 2;
+			for (int i = Integer.parseInt(nowPage) - n; i <= maxPage && i <= Integer.parseInt(nowPage) + 2; i++) {
+				if (i == Integer.parseInt(nowPage)) {
+	%>
+	<a><%=i + " |　"%></a>
+	<%
+		} else {
+	%>
+	<a href="ListBL?page=<%=i%>"><%=i + " |　"%></a>
+	<%
+		}
+	%>
+	<%
+		}
+	%>
+	<a
+		href="ListBL?page=<%=Integer.parseInt(nowPage) == maxPage ? maxPage : Integer.parseInt(nowPage) - 1%>"><%=">　"%></a>
+	<a href="ListBL?page=<%=maxPage%>"><%=">>　"%></a>
+	<%
+		}
+	%>
+
 </body>
 </html>

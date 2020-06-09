@@ -14,10 +14,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class AddCommitBL
+ * Servlet implementation class EditCommitBL
  */
-@WebServlet("/AddCommitBL")
-public class AddCommitBL extends HttpServlet {
+@WebServlet("/EditCommitBL")
+public class EditCommitBL extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static final String URL = "jdbc:mysql://localhost:3306/ishibashi?serverTimezone=JST";
 	private static final String USERNAME = "root";
@@ -27,7 +27,7 @@ public class AddCommitBL extends HttpServlet {
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public AddCommitBL() {
+	public EditCommitBL() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -37,11 +37,11 @@ public class AddCommitBL extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		Connection connect;
 		Statement stmt;
 		ResultSet rs;
-		String InsQuery;
+		String UpdQuery;
+		String id = request.getParameter("id");
 		String name = request.getParameter("name");
 		String address = request.getParameter("address");
 		String tel = request.getParameter("tel");
@@ -49,14 +49,14 @@ public class AddCommitBL extends HttpServlet {
 
 		tel = tel.replace("-", "");
 
-		InsQuery = "insert into `jyusyoroku` (`id`, `name`, `address`, `tel`, `categoryid`, `delete_flg`) values (null, '"
-				+ name + "', '" + address + "', '" + tel + "', '" + categoryid + "', '0');";
+		UpdQuery = "update `jyusyoroku` set `name` = '" + name + "', `address` = '" + address + "', `tel` = '" + tel
+				+ "', `categoryid` = '" + categoryid + "' where `jyusyoroku`.`id` = " + id + ";";
 
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			connect = DriverManager.getConnection(URL, USERNAME, PASSWORD);
 			stmt = connect.createStatement();
-			stmt.executeUpdate(InsQuery);
+			stmt.executeUpdate(UpdQuery);
 
 			stmt.close();
 			connect.close();

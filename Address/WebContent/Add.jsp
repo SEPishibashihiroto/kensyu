@@ -37,7 +37,7 @@
 	<h1>住所録管理システム：住所録登録</h1>
 	<br>
 	<%
-		if (errmsg == null) {
+		if (errmsg.equals("")) {
 	%>
 	<h2></h2>
 	<%
