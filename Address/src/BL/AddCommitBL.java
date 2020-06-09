@@ -22,6 +22,7 @@ public class AddCommitBL extends HttpServlet {
 	static final String URL = "jdbc:mysql://localhost:3306/ishibashi?serverTimezone=JST";
 	static final String USERNAME = "root";
 	static final String PASSWORD = "";
+	static final String PASSWORD2 = "ishi1196";
 
 	/**
 	 * @see HttpServlet#HttpServlet()
@@ -46,14 +47,14 @@ public class AddCommitBL extends HttpServlet {
 		String tel = request.getParameter("tel");
 		String categoryid = request.getParameter("categoryid");
 
-		tel = tel.replace("-", "");
+		String tel2 = tel.replace("-", "");
 
 		InsQuery = "insert into `jyusyoroku` (`id`, `name`, `address`, `tel`, `categoryid`, `delete_flg`) values (null, '"
-				+ name + "', '" + address + "', '" + tel + "', '" + categoryid + "', '0');";
+				+ name + "', '" + address + "', '" + tel2 + "', '" + categoryid + "', '0');";
 
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
-			connect = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+			connect = DriverManager.getConnection(URL, USERNAME, PASSWORD2);
 			stmt = connect.createStatement();
 			rs = stmt.executeQuery(InsQuery);
 		} catch (SQLException e) {

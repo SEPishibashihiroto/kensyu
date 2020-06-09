@@ -23,6 +23,7 @@ public class ListBL extends HttpServlet {
 	static final String URL = "jdbc:mysql://localhost:3306/ishibashi?serverTimezone=JST";
 	static final String USERNAME = "root";
 	static final String PASSWORD = "";
+	static final String PASSWORD2 = "ishi1196";
 
 	/**
 	 * @see HttpServlet#HttpServlet()
@@ -59,7 +60,7 @@ public class ListBL extends HttpServlet {
 
 			Class.forName("com.mysql.cj.jdbc.Driver");
 
-			connect = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+			connect = DriverManager.getConnection(URL, USERNAME, PASSWORD2);
 			stmt = connect.createStatement();
 			CntQuery = "select count(*) as cnt from jyusyoroku;";
 			rs = stmt.executeQuery(CntQuery);

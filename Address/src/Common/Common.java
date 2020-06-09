@@ -10,6 +10,7 @@ public class Common {
 	static final String URL = "jdbc:mysql://localhost:3306/ishibashi?serverTimezone=JST";
 	static final String USERNAME = "root";
 	static final String PASSWORD = "";
+	static final String PASSWORD2 = "ishi1196";
 
 	public static String getErr(String name, String address, String tel) {
 		final String ERRMSG_NAME01 = "名前は全角20文字以内で入力してください";
@@ -36,7 +37,7 @@ public class Common {
 		String getQuery;
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
-			Connection connect = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+			Connection connect = DriverManager.getConnection(URL, USERNAME, PASSWORD2);
 			Statement stmt = connect.createStatement();
 			getQuery = "select categoryid,categoryname from category order by categoryid asc;";
 			ResultSet rs = stmt.executeQuery(getQuery);

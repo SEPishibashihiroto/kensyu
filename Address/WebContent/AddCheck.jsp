@@ -16,14 +16,22 @@
 </head>
 <body>
 	<h1>住所録管理システム：住所録登録</h1>
-	<p>
-		名前：<%=name%></p>
-	<p>
-		住所：<%=address%></p>
-	<p>
-		電話番号：<%=tel%></p>
-
 	<form action="./AddCommitBL">
+
+		<p>
+			名前：<%=name%>
+			<input type="hidden" name="name" value="<%=name%>">
+		</p>
+
+		<p>
+			住所：<%=address%>
+			<input type="hidden" name="address" value="<%=address%>">
+		</p>
+
+		<p>
+			電話番号：<%=tel%>
+			<input type="hidden" name="tel" value="<%=tel%>">
+		</p>
 		<input type="submit" value="登録">
 	</form>
 

@@ -39,12 +39,12 @@
 		%>
 
 		<tr>
-			<td><%=id%></td>
-			<td><%=name%></td>
-			<td><%=address%></td>
-			<td><%=tel%></td>
-			<td><%=cname%></td>
-			<td><form action="Add.jsp">
+			<td><%=id%><input type="hidden" name="id" value="<%=id%>"></td>
+			<td><%=name%><input type="hidden" name="name" value="<%=name%>"></td>
+			<td><%=address%><input type="hidden" name="sddress" value="<%=address%>"></td>
+			<td><%=tel%><input type="hidden" name="tel" value="<%=tel%>"></td>
+			<td><%=cname%><input type="hidden" name="category" value="<%=cname%>"></td>
+			<td><form action="Edit.jsp">
 					<input type="submit" value="編集">
 				</form></td>
 			<td><form action="Add.jsp">
