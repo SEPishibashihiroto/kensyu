@@ -122,7 +122,7 @@
 			<td><%=tel%></td>
 			<td><%=cname%></td>
 			<td>
-				<form action="Edit.jsp">
+				<form action="Edit.jsp" name="<%=id%>" method="get">
 					<input type="hidden" name="id" value="<%=id%>"> <input
 						type="hidden" name="name" value="<%=name%>"> <input
 						type="hidden" name="sddress" value="<%=address%>"> <input
@@ -131,8 +131,13 @@
 						type="submit" value="編集">
 				</form>
 			</td>
-			<td><form action="Add.jsp">
-					<input type="submit" value="削除">
+			<td><form action="Delete.jsp" name="<%=id%>" method="get">
+					<input type="hidden" name="id" value="<%=id%>"> <input
+						type="hidden" name="name" value="<%=name%>"> <input
+						type="hidden" name="sddress" value="<%=address%>"> <input
+						type="hidden" name="tel" value="<%=tel%>"> <input
+						type="hidden" name="category" value="<%=cname%>"> <input
+						type="submit" value="削除">
 				</form></td>
 		</tr>
 

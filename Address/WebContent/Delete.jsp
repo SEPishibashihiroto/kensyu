@@ -7,7 +7,6 @@
 	String address;
 	String tel;
 	String categoryid;
-	String errmsg;
 	String category;
 	Common common = new Common();
 	ResultSet rs = common.getCategoryAll();
@@ -17,45 +16,34 @@
 	name = (String) request.getAttribute("name");
 	address = (String) request.getAttribute("address");
 	tel = (String) request.getAttribute("tel");
-	category = (String) request.getAttribute("categoryid");
-	errmsg = (String) request.getAttribute("errmsg");
+	categoryid = (String) request.getAttribute("categoryid");
+	category = common.getCategoryName(categoryid);
 %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>編集画面</title>
+<title>削除画面</title>
 </head>
 <body>
-	<h1>住所録管理システム：住所録編集</h1>
+	<h1>下記住所録を削除します。よろしいですか？</h1>
 	<br>
 
 
 
-	<form action="./EditBL">
+	<form action="./Delete" method="get">
 		<input type="hidden" name="id" value="<%=id%>">
 		<p>
-			名前：<input type="text" name="name">
+			名前：<%=name%><input type="hidden" name="name" value="<%=name%>">
 		</p>
 		<p>
-			住所：<input type="text" name="address">
+			住所：<%=address%><input type="hidden" name="address" value="<%=address%>">
 		</p>
 		<p>
-			電話番号：<input type="text" name="tel">
+			電話番号：<%=tel%><input type="hidden" name="tel" value="<%=tel%>">
 		</p>
 		<p>
-			カテゴリ： <select name="categoryid">
-				<%
-					while (rs.next()) {
-						String cid = rs.getString("categoryid");
-						String cname = rs.getString("categoryname");
-				%><option value="<%=cid%>">
-					<%=cname%>
-				</option>
-				<%
-					}
-				%>
-			</select>
+			カテゴリ： <%=category%><input type="hidden" name="categoryid" value="<%=categoryid%>">
 		</p>
 		<input type="submit" value="確認">
 	</form>

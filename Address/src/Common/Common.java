@@ -37,7 +37,7 @@ public class Common {
 		String getQuery;
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
-			Connection connect = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+			Connection connect = DriverManager.getConnection(URL, USERNAME, PASSWORD2);
 			Statement stmt = connect.createStatement();
 			getQuery = "select categoryid,categoryname from category order by categoryid asc;";
 			ResultSet rs = stmt.executeQuery(getQuery);
@@ -57,7 +57,7 @@ public class Common {
 		String getQuery;
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
-			Connection connect = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+			Connection connect = DriverManager.getConnection(URL, USERNAME, PASSWORD2);
 			stmt = connect.createStatement();
 			getQuery = "select categoryid,categoryname from category where categoryid=" + id + ";";
 			ResultSet rs = stmt.executeQuery(getQuery);

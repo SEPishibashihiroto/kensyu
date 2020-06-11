@@ -60,7 +60,7 @@ public class ListBL extends HttpServlet {
 
 			Class.forName("com.mysql.cj.jdbc.Driver");
 
-			connect = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+			connect = DriverManager.getConnection(URL, USERNAME, PASSWORD2);
 			stmt = connect.createStatement();
 			CntQuery = "select count(*) as cnt from jyusyoroku;";
 			rs = stmt.executeQuery(CntQuery);

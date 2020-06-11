@@ -17,8 +17,7 @@
 </head>
 <body>
 	<h1>住所録管理システム：住所録編集</h1>
-	<form action="./EditCommitBL">
-
+	<form action="./EditCommitBL" method="get">
 		<p>
 			名前：<%=name%>
 			<input type="hidden" name="name" value="<%=name%>">
