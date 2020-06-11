@@ -19,12 +19,12 @@
 	<form action="./AddCommitBL">
 
 		<p>
-			名前：<%=name%>
+			　　名前：<%=name%>
 			<input type="hidden" name="name" value="<%=name%>">
 		</p>
 
 		<p>
-			住所：<%=address%>
+			　　住所：<%=address%>
 			<input type="hidden" name="address" value="<%=address%>">
 		</p>
 
@@ -33,11 +33,11 @@
 			<input type="hidden" name="tel" value="<%=tel%>">
 		</p>
 		<input type="hidden" name="categoryid" value="<%=categoryid%>">
-		<input type="submit" value="登録">
+		<input type="submit" value="登録" style="background-color: #777777;">
 	</form>
 
 	<form action="./ListBL">
-		<input type="submit" value="戻る">
+		<input type="submit" value="戻る" style="background-color: #777777;">
 	</form>
 </body>
 </html>

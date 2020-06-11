@@ -60,7 +60,7 @@ public class ListBL extends HttpServlet {
 
 			Class.forName("com.mysql.cj.jdbc.Driver");
 
-			connect = DriverManager.getConnection(URL, USERNAME, PASSWORD2);
+			connect = DriverManager.getConnection(URL, USERNAME, PASSWORD);
 			stmt = connect.createStatement();
 			CntQuery = "select count(*) as cnt from jyusyoroku;";
 			rs = stmt.executeQuery(CntQuery);
@@ -70,18 +70,13 @@ public class ListBL extends HttpServlet {
 
 			if (senarq == null) {
 				SelectQuery = "select id,name,address,tel,categoryname from jyusyoroku join category on jyusyoroku.categoryid = category.categoryid where delete_flg = 0  order by id asc limit "
-						+ limitSta + "," + 10 + ";";
+						+ limitSta + ",10;";
 			} else {
-				SerchName = "%" + senarq + "%";
-				SelectQuery = "select id,name,address,tel,categoryname from jyusyoroku join category on jyusyoroku.categoryid = category.categoryid where delete_flg = 0 order by id asc address like "
-						+ SerchName + " limit " + limitSta + "," + 10 + ";";
+				SerchName = "'%" + senarq + "%'";
+				SelectQuery = "select id,name,address,tel,categoryname from jyusyoroku join category on jyusyoroku.categoryid = category.categoryid where address like " +  SerchName
+						+ " and delete_flg = 0 order by id asc  limit " + limitSta + ",10;";
 			}
-			rs = stmt.executeQuery(SelectQuery);
-			//			rs.next();
-			//			StringBuilder sb = new StringBuilder(rs.getString("tel"));
-			//			sb.insert(3, "-");
-			//			sb.insert(8, "-");
-			//リクエストの追加
+			rs = stmt.executeQuery(SelectQuery);			//リクエストの追加
 			request.setAttribute("ListCnt", listCnt);
 			request.setAttribute("Result", rs);
 			request.setAttribute("page", nowPage);
@@ -97,8 +92,6 @@ public class ListBL extends HttpServlet {
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
-
-
 
 	}
 

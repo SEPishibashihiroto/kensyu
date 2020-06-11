@@ -5,6 +5,7 @@
 	int listCnt = (int) request.getAttribute("ListCnt");
 	String nowPage = (String) request.getAttribute("page");
 	int maxPage = listCnt % 10 == 0 ? listCnt / 10 : listCnt / 10 + 1;
+	int nowpage = Integer.parseInt(nowPage);
 %>
 <!DOCTYPE html>
 <html>
@@ -15,17 +16,23 @@
 <body>
 	<h1>住所管理システム：住所録一覧</h1>
 
+
 	<form action="Add.jsp">
-		<input type="submit" value="新規登録">
+		<input type="submit" value="新規登録" style="background-color: #777777;">
+	</form>
+
+	<form action="./ListBL">
+		<input type="text" name="SerchName"> <input type="submit"
+			value="検索" style="background-color: #777777;">
 	</form>
 
 	<%
-		if (Integer.parseInt(nowPage) == 1) {//1ページ目の処理
+		if (nowpage == 1) {//1ページ目の処理
 	%>
 	<a href="ListBL?page=1"><%="<<　"%></a>
 	<%
-		for (int i = Integer.parseInt(nowPage); i <= maxPage && i <= Integer.parseInt(nowPage) + 2; i++) {
-				if (i == Integer.parseInt(nowPage)) {
+		for (int i = nowpage; i <= maxPage && i <= nowpage + 2; i++) {
+				if (i == nowpage) {
 	%>
 	<a><%=i + " |　"%></a>
 	<%
@@ -39,18 +46,18 @@
 	<%
 		}
 	%>
-	<a href="ListBL?page=<%=Integer.parseInt(nowPage) + 1%>"><%=">　"%></a>
+	<a href="ListBL?page=<%=nowpage + 1%>"><%=">　"%></a>
 	<a href="ListBL?page=<%=maxPage%>"><%=">>　"%></a>
 
 	<%
-		} else if (Integer.parseInt(nowPage) == maxPage) {//最終ページの処理
+		} else if (nowpage == maxPage) {//最終ページの処理
 	%>
 	<a href="ListBL?page=1"><%="<<　"%></a>
-	<a href="ListBL?page=<%=Integer.parseInt(nowPage) - 1%>"><%="<　"%></a>
+	<a href="ListBL?page=<%=nowpage - 1%>"><%="<　"%></a>
 	<%
 		int n = maxPage == 2 ? 1 : 2;
-			for (int i = Integer.parseInt(nowPage) - n; i <= Integer.parseInt(nowPage); i++) {
-				if (i == Integer.parseInt(nowPage)) {
+			for (int i = nowpage - n; i <= nowpage; i++) {
+				if (i == nowpage) {
 	%>
 	<a><%=i + " |　"%></a>
 	<%
@@ -69,11 +76,11 @@
 		} else {//それ以外のページの処理
 	%>
 	<a href="ListBL?page=1"><%="<<　"%></a>
-	<a href="ListBL?page=<%=Integer.parseInt(nowPage) - 1%>"><%="<　"%></a>
+	<a href="ListBL?page=<%=nowpage - 1%>"><%="<　"%></a>
 	<%
-		int n = Integer.parseInt(nowPage) == 2 ? 1 : 2;
-			for (int i = Integer.parseInt(nowPage) - n; i <= maxPage && i <= Integer.parseInt(nowPage) + 2; i++) {
-				if (i == Integer.parseInt(nowPage)) {
+		int n = nowpage == 2 ? 1 : 2;
+			for (int i = nowpage - n; i <= maxPage && i <= nowpage + 2; i++) {
+				if (i == nowpage) {
 	%>
 	<a><%=i + " |　"%></a>
 	<%
@@ -86,8 +93,7 @@
 	<%
 		}
 	%>
-	<a
-		href="ListBL?page=<%=Integer.parseInt(nowPage) == maxPage ? maxPage : Integer.parseInt(nowPage) - 1%>"><%=">　"%></a>
+	<a href="ListBL?page=<%=nowpage == maxPage ? maxPage : nowpage - 1%>"><%=">　"%></a>
 	<a href="ListBL?page=<%=maxPage%>"><%=">>　"%></a>
 	<%
 		}
@@ -97,21 +103,22 @@
 
 
 
-	<table border="1">
+	<table border="1"
+		style="border-collapse: collapse; border-color: black">
 		<tr>
-			<th>No.</th>
-			<th>名前</th>
-			<th>住所</th>
-			<th>電話番号</th>
-			<th>カテゴリ</th>
-			<th colspan="2"></th>
+			<th style="background-color: #75A9FF;">No.</th>
+			<th style="background-color: #75A9FF;">名前</th>
+			<th style="background-color: #75A9FF;">住所</th>
+			<th style="background-color: #75A9FF;">電話番号</th>
+			<th style="background-color: #75A9FF;">カテゴリ</th>
+			<th colspan="2" style="background-color: #75A9FF;"></th>
 		</tr>
 		<%
 			while (rs.next()) {
 				int id = rs.getInt("id");
 				String name = rs.getString("name");
 				String address = rs.getString("address");
-				String tel = rs.getString("tel");
+				String tel = new StringBuilder(rs.getString("tel")).insert(3, "-").insert(8, "-").toString();
 				String cname = rs.getString("categoryname");
 		%>
 
@@ -122,23 +129,25 @@
 			<td><%=tel%></td>
 			<td><%=cname%></td>
 			<td>
-				<form action="Edit.jsp" name="<%=id%>" method="get">
+				<form action="Edit.jsp" name="<%="ed" + id%>">
 					<input type="hidden" name="id" value="<%=id%>"> <input
 						type="hidden" name="name" value="<%=name%>"> <input
-						type="hidden" name="sddress" value="<%=address%>"> <input
+						type="hidden" name="address" value="<%=address%>"> <input
 						type="hidden" name="tel" value="<%=tel%>"> <input
 						type="hidden" name="category" value="<%=cname%>"> <input
-						type="submit" value="編集">
+						type="submit" value="編集" style="background-color: #777777;">
 				</form>
 			</td>
-			<td><form action="Delete.jsp" name="<%=id%>" method="get">
+			<td>
+				<form action="Delete.jsp" name="<%="del" + id%>" method="get">
 					<input type="hidden" name="id" value="<%=id%>"> <input
 						type="hidden" name="name" value="<%=name%>"> <input
-						type="hidden" name="sddress" value="<%=address%>"> <input
+						type="hidden" name="address" value="<%=address%>"> <input
 						type="hidden" name="tel" value="<%=tel%>"> <input
 						type="hidden" name="category" value="<%=cname%>"> <input
-						type="submit" value="削除">
-				</form></td>
+						type="submit" value="削除" style="background-color: #777777;">
+				</form>
+			</td>
 		</tr>
 
 		<%
@@ -148,12 +157,12 @@
 	</table>
 
 	<%
-		if (Integer.parseInt(nowPage) == 1) {//1ページ目の処理
+		if (nowpage == 1) {//1ページ目の処理
 	%>
 	<a href="ListBL?page=1"><%="<<　"%></a>
 	<%
-		for (int i = Integer.parseInt(nowPage); i <= maxPage && i <= Integer.parseInt(nowPage) + 2; i++) {
-				if (i == Integer.parseInt(nowPage)) {
+		for (int i = nowpage; i <= maxPage && i <= nowpage + 2; i++) {
+				if (i == nowpage) {
 	%>
 	<a><%=i + " |　"%></a>
 	<%
@@ -167,18 +176,18 @@
 	<%
 		}
 	%>
-	<a href="ListBL?page=<%=Integer.parseInt(nowPage) + 1%>"><%=">　"%></a>
+	<a href="ListBL?page=<%=nowpage + 1%>"><%=">　"%></a>
 	<a href="ListBL?page=<%=maxPage%>"><%=">>　"%></a>
 
 	<%
-		} else if (Integer.parseInt(nowPage) == maxPage) {//最終ページの処理
+		} else if (nowpage == maxPage) {//最終ページの処理
 	%>
 	<a href="ListBL?page=1"><%="<<　"%></a>
-	<a href="ListBL?page=<%=Integer.parseInt(nowPage) - 1%>"><%="<　"%></a>
+	<a href="ListBL?page=<%=nowpage - 1%>"><%="<　"%></a>
 	<%
 		int n = maxPage == 2 ? 1 : 2;
-			for (int i = Integer.parseInt(nowPage) - n; i <= Integer.parseInt(nowPage); i++) {
-				if (i == Integer.parseInt(nowPage)) {
+			for (int i = nowpage - n; i <= nowpage; i++) {
+				if (i == nowpage) {
 	%>
 	<a><%=i + " |　"%></a>
 	<%
@@ -197,11 +206,11 @@
 		} else {//それ以外のページの処理
 	%>
 	<a href="ListBL?page=1"><%="<<　"%></a>
-	<a href="ListBL?page=<%=Integer.parseInt(nowPage) - 1%>"><%="<　"%></a>
+	<a href="ListBL?page=<%=nowpage - 1%>"><%="<　"%></a>
 	<%
-		int n = Integer.parseInt(nowPage) == 2 ? 1 : 2;
-			for (int i = Integer.parseInt(nowPage) - n; i <= maxPage && i <= Integer.parseInt(nowPage) + 2; i++) {
-				if (i == Integer.parseInt(nowPage)) {
+		int n = nowpage == 2 ? 1 : 2;
+			for (int i = nowpage - n; i <= maxPage && i <= nowpage + 2; i++) {
+				if (i == nowpage) {
 	%>
 	<a><%=i + " |　"%></a>
 	<%
@@ -214,12 +223,15 @@
 	<%
 		}
 	%>
-	<a
-		href="ListBL?page=<%=Integer.parseInt(nowPage) == maxPage ? maxPage : Integer.parseInt(nowPage) - 1%>"><%=">　"%></a>
+	<a href="ListBL?page=<%=nowpage == maxPage ? maxPage : nowpage - 1%>"><%=">　"%></a>
 	<a href="ListBL?page=<%=maxPage%>"><%=">>　"%></a>
 	<%
 		}
 	%>
+
+	<form action="Add.jsp">
+		<input type="submit" value="新規登録" style="background-color: #777777;">
+	</form>
 
 </body>
 </html>

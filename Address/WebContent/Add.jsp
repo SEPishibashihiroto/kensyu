@@ -53,10 +53,10 @@
 
 	<form action="./AddBL" method="get">
 		<p>
-			名前：<input type="text" name="name">
+			　　名前：<input type="text" name="name">
 		</p>
 		<p>
-			住所：<input type="text" name="address">
+			　　住所：<input type="text" name="address">
 		</p>
 		<p>
 			電話番号：<input type="text" name="tel">
@@ -75,11 +75,11 @@
 				%>
 			</select>
 		</p>
-		<input type="submit" value="確認">
+		<input type="submit" value="確認" style="background-color: #777777;">
 	</form>
 
 	<form action="./ListBL">
-		<input type="submit" value="戻る">
+		<input type="submit" value="戻る" style="background-color: #777777;">
 	</form>
 </body>
 </html>

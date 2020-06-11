@@ -14,10 +14,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class EditCommitBL
+ * Servlet implementation class DeletCommitBL
  */
-@WebServlet("/EditCommitBL")
-public class EditCommitBL extends HttpServlet {
+@WebServlet("/DeletCommitBL")
+public class DeletCommitBL extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static final String URL = "jdbc:mysql://localhost:3306/ishibashi?serverTimezone=JST";
 	private static final String USERNAME = "root";
@@ -27,7 +27,7 @@ public class EditCommitBL extends HttpServlet {
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public EditCommitBL() {
+	public DeletCommitBL() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -41,16 +41,11 @@ public class EditCommitBL extends HttpServlet {
 		Statement stmt;
 		ResultSet rs;
 		String UpdQuery;
-		String id = request.getParameter("id");
-		String name = request.getParameter("name");
-		String address = request.getParameter("address");
-		String tel = request.getParameter("tel");
-		String categoryid = request.getParameter("categoryid");
+		String id;
 
-		tel = tel.replace("-", "");
-
-		UpdQuery = "update `jyusyoroku` set `name` = '" + name + "', `address` = '" + address + "', `tel` = '" + tel
-				+ "', `categoryid` = '" + categoryid + "' where `jyusyoroku`.`id` = " + id + ";";
+		id = request.getParameter("id");
+		String tel = request.getParameter("tel").replace("-", "");
+		UpdQuery = "update `jyusyoroku` set `delete_flg` = '" + 1 + "' where `jyusyoroku`.`id` = " + id + ";";
 
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");

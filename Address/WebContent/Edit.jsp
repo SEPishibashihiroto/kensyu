@@ -11,14 +11,16 @@
 	String category;
 	Common common = new Common();
 	ResultSet rs = common.getCategoryAll();
+	String catename;
 %>
 <%
-	id = (String) request.getAttribute("id");
-	name = (String) request.getAttribute("name");
-	address = (String) request.getAttribute("address");
-	tel = (String) request.getAttribute("tel");
-	category = (String) request.getAttribute("categoryid");
-	errmsg = (String) request.getAttribute("errmsg");
+	id = (String) request.getParameter("id");
+	name = (String) request.getParameter("name");
+	address = (String) request.getParameter("address");
+	tel = (String) request.getParameter("tel");
+	category = (String) request.getParameter("categoryid");
+	errmsg = (String) request.getParameter("errmsg");
+	catename=(String)request.getParameter("category");
 %>
 <!DOCTYPE html>
 <html>
@@ -30,15 +32,12 @@
 	<h1>住所録管理システム：住所録編集</h1>
 	<br>
 
-
-
 	<form action="./EditBL">
-		<input type="hidden" name="id" value="<%=id%>">
 		<p>
-			名前：<input type="text" name="name">
+			　　名前：<input type="text" name="name">
 		</p>
 		<p>
-			住所：<input type="text" name="address">
+			　　住所：<input type="text" name="address">
 		</p>
 		<p>
 			電話番号：<input type="text" name="tel">
@@ -57,11 +56,12 @@
 				%>
 			</select>
 		</p>
-		<input type="submit" value="確認">
+		<input type="hidden" name="id" value="<%=id%>"> <input
+			type="submit" value="確認" style="background-color: #777777;">
 	</form>
 
 	<form action="./ListBL">
-		<input type="submit" value="戻る">
+		<input type="submit" value="戻る" style="background-color: #777777;">
 	</form>
 </body>
 </html>
