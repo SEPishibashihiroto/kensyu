@@ -54,7 +54,7 @@ public class AddCommitBL extends HttpServlet {
 
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
-			connect = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+			connect = DriverManager.getConnection(URL, USERNAME, PASSWORD2);
 			stmt = connect.createStatement();
 			stmt.executeUpdate(InsQuery);
 

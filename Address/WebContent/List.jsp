@@ -29,9 +29,10 @@
 	<%
 		if (nowpage == 1) {//1ページ目の処理
 	%>
-	<a href="ListBL?page=1"><%="<<　"%></a>
+	<a><%="<<　"%></a>
+	<a><%="<　"%></a>
 	<%
-		for (int i = nowpage; i <= maxPage && i <= nowpage + 2; i++) {
+		for (int i = nowpage; i <= maxPage && i <= 5; i++) {
 				if (i == nowpage) {
 	%>
 	<a><%=i + " |　"%></a>
@@ -48,15 +49,13 @@
 	%>
 	<a href="ListBL?page=<%=nowpage + 1%>"><%=">　"%></a>
 	<a href="ListBL?page=<%=maxPage%>"><%=">>　"%></a>
-
 	<%
-		} else if (nowpage == maxPage) {//最終ページの処理
+		} else if (nowpage == 2) {//2ページ目の処理
 	%>
 	<a href="ListBL?page=1"><%="<<　"%></a>
 	<a href="ListBL?page=<%=nowpage - 1%>"><%="<　"%></a>
 	<%
-		int n = maxPage == 2 ? 1 : 2;
-			for (int i = nowpage - n; i <= nowpage; i++) {
+		for (int i = nowpage - 1; i <= maxPage && i <= 5; i++) {
 				if (i == nowpage) {
 	%>
 	<a><%=i + " |　"%></a>
@@ -72,6 +71,52 @@
 	%>
 
 	<a href="ListBL?page=<%=maxPage%>"><%=">>　"%></a>
+	<%
+		} else if (nowpage == maxPage - 1) {//最終ページの1ページ前の処理
+	%>
+	<a href="ListBL?page=1"><%="<<　"%></a>
+	<a href="ListBL?page=<%=nowpage - 1%>"><%="<　"%></a>
+	<%
+		for (int i = maxPage - 4; i <= maxPage; i++) {
+				if (i == nowpage) {
+	%>
+	<a><%=i + " |　"%></a>
+	<%
+		} else {
+	%>
+	<a href="ListBL?page=<%=i%>"><%=i + " |　"%></a>
+	<%
+		}
+	%>
+	<%
+		}
+	%>
+	<a href="ListBL?page=<%=nowPage + 1%>"><%=">　"%></a>
+	<a href="ListBL?page=<%=maxPage%>"><%=">>　"%></a>
+
+	<%
+		} else if (nowpage == maxPage) {//最終ページの処理
+	%>
+	<a href="ListBL?page=1"><%="<<　"%></a>
+	<a href="ListBL?page=<%=nowpage - 1%>"><%="<　"%></a>
+	<%
+		int n = maxPage == 2 ? 1 : 4;
+			for (int i = nowpage - n; i <= nowpage; i++) {
+				if (i == nowpage) {
+	%>
+	<a><%=i + " |　"%></a>
+	<%
+		} else {
+	%>
+	<a href="ListBL?page=<%=i%>"><%=i + " |　"%></a>
+	<%
+		}
+	%>
+	<%
+		}
+	%>
+	<a><%=">　"%></a>
+	<a><%=">>　"%></a>
 	<%
 		} else {//それ以外のページの処理
 	%>
@@ -98,10 +143,6 @@
 	<%
 		}
 	%>
-
-
-
-
 
 	<table border="1"
 		style="border-collapse: collapse; border-color: black">
@@ -159,9 +200,10 @@
 	<%
 		if (nowpage == 1) {//1ページ目の処理
 	%>
-	<a href="ListBL?page=1"><%="<<　"%></a>
+	<a><%="<<　"%></a>
+	<a><%="<　"%></a>
 	<%
-		for (int i = nowpage; i <= maxPage && i <= nowpage + 2; i++) {
+		for (int i = nowpage; i <= maxPage && i <= 5; i++) {
 				if (i == nowpage) {
 	%>
 	<a><%=i + " |　"%></a>
@@ -178,15 +220,13 @@
 	%>
 	<a href="ListBL?page=<%=nowpage + 1%>"><%=">　"%></a>
 	<a href="ListBL?page=<%=maxPage%>"><%=">>　"%></a>
-
 	<%
-		} else if (nowpage == maxPage) {//最終ページの処理
+		} else if (nowpage == 2) {//2ページ目の処理
 	%>
 	<a href="ListBL?page=1"><%="<<　"%></a>
 	<a href="ListBL?page=<%=nowpage - 1%>"><%="<　"%></a>
 	<%
-		int n = maxPage == 2 ? 1 : 2;
-			for (int i = nowpage - n; i <= nowpage; i++) {
+		for (int i = nowpage - 1; i <= maxPage && i <= 5; i++) {
 				if (i == nowpage) {
 	%>
 	<a><%=i + " |　"%></a>
@@ -202,6 +242,52 @@
 	%>
 
 	<a href="ListBL?page=<%=maxPage%>"><%=">>　"%></a>
+	<%
+		} else if (nowpage == maxPage - 1) {//最終ページの1ページ前の処理
+	%>
+	<a href="ListBL?page=1"><%="<<　"%></a>
+	<a href="ListBL?page=<%=nowpage - 1%>"><%="<　"%></a>
+	<%
+		for (int i = maxPage - 4; i <= maxPage; i++) {
+				if (i == nowpage) {
+	%>
+	<a><%=i + " |　"%></a>
+	<%
+		} else {
+	%>
+	<a href="ListBL?page=<%=i%>"><%=i + " |　"%></a>
+	<%
+		}
+	%>
+	<%
+		}
+	%>
+	<a href="ListBL?page=<%=nowPage + 1%>"><%=">　"%></a>
+	<a href="ListBL?page=<%=maxPage%>"><%=">>　"%></a>
+
+	<%
+		} else if (nowpage == maxPage) {//最終ページの処理
+	%>
+	<a href="ListBL?page=1"><%="<<　"%></a>
+	<a href="ListBL?page=<%=nowpage - 1%>"><%="<　"%></a>
+	<%
+		int n = maxPage == 2 ? 1 : 4;
+			for (int i = nowpage - n; i <= nowpage; i++) {
+				if (i == nowpage) {
+	%>
+	<a><%=i + " |　"%></a>
+	<%
+		} else {
+	%>
+	<a href="ListBL?page=<%=i%>"><%=i + " |　"%></a>
+	<%
+		}
+	%>
+	<%
+		}
+	%>
+	<a><%=">　"%></a>
+	<a><%=">>　"%></a>
 	<%
 		} else {//それ以外のページの処理
 	%>
@@ -232,6 +318,7 @@
 	<form action="Add.jsp">
 		<input type="submit" value="新規登録" style="background-color: #777777;">
 	</form>
+
 
 </body>
 </html>
