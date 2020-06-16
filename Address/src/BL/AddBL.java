@@ -33,27 +33,33 @@ public class AddBL extends HttpServlet {
 		// TODO Auto-generated method stub
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
 
+		//宣言
 		String name;
 		String address;
 		String tel;
 		String categoryid;
 		String errmsg;
 
+		//値の代入
 		name = request.getParameter("name");
 		address = request.getParameter("address");
 		tel = request.getParameter("tel");
 		categoryid = request.getParameter("categoryid");
 		errmsg = Common.getErr(name, address, tel);
 
+		//値のセット
 		request.setAttribute("name", name);
 		request.setAttribute("address", address);
 		request.setAttribute("tel", tel);
 		request.setAttribute("categoryid", categoryid);
 		request.setAttribute("errmsg", errmsg);
 
+		//画面推移
 		if (errmsg.equals("")) {
+			//何もエラーがない場合確認画面へ
 			getServletContext().getRequestDispatcher("/AddCheck.jsp").forward(request, response);
 		} else {
+			//エラーがあったらもう一度入力しなおしてもらう
 			getServletContext().getRequestDispatcher("/Add.jsp").forward(request, response);
 		}
 	}

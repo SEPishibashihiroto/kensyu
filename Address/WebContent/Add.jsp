@@ -1,7 +1,9 @@
+<!-- jspで使用するものをインポートする -->
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8" import="java.sql.*" import="javax.servlet.http.*"
 	import="javax.servlet.*" import="Common.Common"%>
 
+<!-- 宣言 -->
 <%
 	String name;
 	String address;
@@ -12,6 +14,8 @@
 	Common common = new Common();
 	ResultSet rs = common.getCategoryAll();
 %>
+
+<!-- 値を取得 -->
 <%
 	if ((String) request.getAttribute("name") == null) {
 		name = "";
@@ -36,6 +40,7 @@
 <body>
 	<h1>住所録管理システム：住所録登録</h1>
 	<br>
+	<!-- エラーが起こればここに表示 -->
 	<%
 		if (errmsg.equals("")) {
 	%>
@@ -51,6 +56,9 @@
 	%>
 
 
+	<!-- テキストボックスに入力してもらい、
+		 入力された値を持ってAddBLへ推移
+	 -->
 	<form action="./AddBL" method="get">
 		<p>
 			　　名前：<input type="text" name="name">
@@ -63,6 +71,8 @@
 		</p>
 		<p>
 			カテゴリ： <select name="categoryid">
+			<option value="0"></option>
+				<!-- getCategoryAll()で取得した結果をここで表示 -->
 				<%
 					while (rs.next()) {
 						String cid = rs.getString("categoryid");
@@ -78,6 +88,7 @@
 		<input type="submit" value="確認" style="background-color: #777777;">
 	</form>
 
+	<!-- ListBLへ推移 -->
 	<form action="./ListBL">
 		<input type="submit" value="戻る" style="background-color: #777777;">
 	</form>

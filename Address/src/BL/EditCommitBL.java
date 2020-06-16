@@ -37,27 +37,34 @@ public class EditCommitBL extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		//宣言
 		Connection connect;
 		Statement stmt;
 		ResultSet rs;
 		String UpdQuery;
+
+		//値を取得
 		String id = request.getParameter("id");
 		String name = request.getParameter("name");
 		String address = request.getParameter("address");
 		String tel = request.getParameter("tel");
 		String categoryid = request.getParameter("categoryid");
 
+		//ハイフンをなくす
 		tel = tel.replace("-", "");
 
+		//SQL文の作成
 		UpdQuery = "update `jyusyoroku` set `name` = '" + name + "', `address` = '" + address + "', `tel` = '" + tel
 				+ "', `categoryid` = '" + categoryid + "' where `jyusyoroku`.`id` = " + id + ";";
 
 		try {
+			//DBへ接続
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			connect = DriverManager.getConnection(URL, USERNAME, PASSWORD2);
 			stmt = connect.createStatement();
 			stmt.executeUpdate(UpdQuery);
 
+			//接続したDBを閉じる
 			stmt.close();
 			connect.close();
 		} catch (SQLException e) {
@@ -66,6 +73,7 @@ public class EditCommitBL extends HttpServlet {
 			e.printStackTrace();
 		}
 
+		//ListBLへ推移
 		getServletContext().getRequestDispatcher("/ListBL").forward(request, response);
 	}
 

@@ -1,6 +1,9 @@
+<!-- jspで使用するものをインポートする -->
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8" import="java.sql.*" import="javax.servlet.http.*"
 	import="javax.servlet.*" import="Common.Common"%>
+
+<!-- 宣言 -->
 <%
 	String id;
 	String name;
@@ -9,6 +12,8 @@
 	String categoryid;
 	String category;
 %>
+
+<!-- 値を取得 -->
 <%
 	id = (String) request.getParameter("id");
 	name = (String) request.getParameter("name");
@@ -26,7 +31,9 @@
 	<h1>下記住所録を削除します。よろしいですか？</h1>
 	<br>
 
-
+<!-- List.jspで削除ボタンが押されたid番号の値を表示
+	 また、OKボタンが押されたらid、telの値を持ってDeletCommitBLへ推移
+ -->
 	<form action="./DeletCommitBL" method="get">
 		<input type="hidden" name="id" value="<%=id%>">
 		<p>
@@ -44,6 +51,7 @@
 		<input type="submit" value="OK" style="background-color: #777777;">
 	</form>
 
+	<!-- ボタンが押されたら住所録一覧画面へ推移 -->
 	<form action="./ListBL">
 		<input type="submit" value="キャンセル" style="background-color: #777777;">
 	</form>

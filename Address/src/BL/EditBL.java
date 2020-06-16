@@ -30,6 +30,7 @@ public class EditBL extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		//宣言
 		String id;
 		String name;
 		String address;
@@ -37,6 +38,7 @@ public class EditBL extends HttpServlet {
 		String categoryid;
 		String errmsg;
 
+		//値を取得
 		id = request.getParameter("id");
 		name = request.getParameter("name");
 		address = request.getParameter("address");
@@ -44,6 +46,7 @@ public class EditBL extends HttpServlet {
 		categoryid = request.getParameter("categoryid");
 		errmsg = Common.getErr(name, address, tel);
 
+		//値をセット
 		request.setAttribute("id", id);
 		request.setAttribute("name", name);
 		request.setAttribute("address", address);
@@ -52,8 +55,10 @@ public class EditBL extends HttpServlet {
 		request.setAttribute("errmsg", errmsg);
 
 		if (errmsg.equals("")) {
+			//エラーが無ければEditCheckへ推移
 			getServletContext().getRequestDispatcher("/EditCheck.jsp").forward(request, response);
 		} else {
+			//エラーがあったらもう一度入力する
 			getServletContext().getRequestDispatcher("/Edit.jsp").forward(request, response);
 		}
 

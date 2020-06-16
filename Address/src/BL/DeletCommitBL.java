@@ -37,22 +37,27 @@ public class DeletCommitBL extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		//宣言
 		Connection connect;
 		Statement stmt;
 		ResultSet rs;
 		String UpdQuery;
 		String id;
 
+		//値を取得
 		id = request.getParameter("id");
-		String tel = request.getParameter("tel").replace("-", "");
+		String tel = request.getParameter("tel").replace("-", "");//値を取得し、ハイフンをなくす
+		//SQL文の作成
 		UpdQuery = "update `jyusyoroku` set `delete_flg` = '" + 1 + "' where `jyusyoroku`.`id` = " + id + ";";
 
 		try {
+			//DBへ接続
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			connect = DriverManager.getConnection(URL, USERNAME, PASSWORD2);
 			stmt = connect.createStatement();
 			stmt.executeUpdate(UpdQuery);
 
+			//接続したDBを閉じる
 			stmt.close();
 			connect.close();
 		} catch (SQLException e) {
@@ -61,6 +66,7 @@ public class DeletCommitBL extends HttpServlet {
 			e.printStackTrace();
 		}
 
+		//ListBLへ推移
 		getServletContext().getRequestDispatcher("/ListBL").forward(request, response);
 	}
 

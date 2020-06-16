@@ -1,5 +1,8 @@
+<!-- jspで使用するものをインポートする -->
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8" import="java.sql.*"%>
+
+<!-- 宣言、値を取得 -->
 <%
 	ResultSet rs = (ResultSet) request.getAttribute("Result");
 	int listCnt = (int) request.getAttribute("ListCnt");
@@ -16,16 +19,19 @@
 <body>
 	<h1>住所管理システム：住所録一覧</h1>
 
-
+	<!-- 登録画面へ推移するためのボタン -->
 	<form action="Add.jsp">
 		<input type="submit" value="新規登録" style="background-color: #777777;">
 	</form>
 
+	<!-- 住所を検索し、絞り込むためのテキストボックス、ボタン -->
 	<form action="./ListBL">
 		<input type="text" name="SerchName"> <input type="submit"
 			value="検索" style="background-color: #777777;">
 	</form>
 
+
+	<!-- ページング処理　ここから -->
 	<%
 		if (nowpage == 1) {//1ページ目の処理
 	%>
@@ -143,7 +149,9 @@
 	<%
 		}
 	%>
+	<!-- ページング処理  ここまで -->
 
+	<!-- 住所録一覧のテーブル -->
 	<table border="1"
 		style="border-collapse: collapse; border-color: black">
 		<tr>
@@ -154,6 +162,7 @@
 			<th style="background-color: #75A9FF;">カテゴリ</th>
 			<th colspan="2" style="background-color: #75A9FF;"></th>
 		</tr>
+		<!-- ListBLで行ったリザルトを実行 -->
 		<%
 			while (rs.next()) {
 				int id = rs.getInt("id");
@@ -170,6 +179,10 @@
 			<td><%=tel%></td>
 			<td><%=cname%></td>
 			<td>
+				<!--
+					編集画面へ行くためのボタン
+					id、name、address、tel、cnameを持ってEdit.jspへ推移
+				 -->
 				<form action="Edit.jsp" name="<%="ed" + id%>">
 					<input type="hidden" name="id" value="<%=id%>"> <input
 						type="hidden" name="name" value="<%=name%>"> <input
@@ -180,6 +193,10 @@
 				</form>
 			</td>
 			<td>
+				<!--
+					削除画面へ行くためのボタン
+					idを持ってDelete.jspへ推移
+				 -->
 				<form action="Delete.jsp" name="<%="del" + id%>" method="get">
 					<input type="hidden" name="id" value="<%=id%>"> <input
 						type="hidden" name="name" value="<%=name%>"> <input
@@ -197,6 +214,7 @@
 
 	</table>
 
+	<!-- ページング処理　ここから -->
 	<%
 		if (nowpage == 1) {//1ページ目の処理
 	%>
@@ -314,7 +332,9 @@
 	<%
 		}
 	%>
+	<!-- ページング処理  ここまで -->
 
+	<!-- 登録画面へ推移するためのボタン -->
 	<form action="Add.jsp">
 		<input type="submit" value="新規登録" style="background-color: #777777;">
 	</form>

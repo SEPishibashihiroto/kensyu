@@ -1,5 +1,8 @@
+<!-- jspで使用するものをインポートする -->
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8" import="java.sql.*" import="Common.Common"%>
+
+<!-- 宣言、値を取得 -->
 <%
 	Common common = new Common();
 	String id = (String) request.getAttribute("id");
@@ -17,6 +20,10 @@
 </head>
 <body>
 	<h1>住所録管理システム：住所録編集</h1>
+
+	<!-- Add.jspで入力したものを表示
+		 また、その値を持ってAddCommitBLへ推移
+	 -->
 	<form action="./EditCommitBL" method="get">
 		<p>
 			　　名前：<%=name%>
@@ -37,7 +44,8 @@
 		<input type="submit" value="編集" style="background-color: #777777;">
 	</form>
 
-	<form action="./ListBL">
+	<!-- 編集画面へ推移 -->
+	<form action="./Edit.jsp">
 		<input type="submit" value="戻る" style="background-color: #777777;">
 	</form>
 </body>

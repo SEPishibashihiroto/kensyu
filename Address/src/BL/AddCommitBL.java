@@ -37,27 +37,33 @@ public class AddCommitBL extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		//宣言
 		Connection connect;
 		Statement stmt;
 		ResultSet rs;
 		String InsQuery;
+
+		//値をセット
 		String name = request.getParameter("name");
 		String address = request.getParameter("address");
 		String tel = request.getParameter("tel");
 		String categoryid = request.getParameter("categoryid");
 
+		//電話番号の-(ハイフン)をなくす
 		tel = tel.replace("-", "");
 
+		//SQL文の作成
 		InsQuery = "insert into `jyusyoroku` (`id`, `name`, `address`, `tel`, `categoryid`, `delete_flg`) values (null, '"
 				+ name + "', '" + address + "', '" + tel + "', '" + categoryid + "', '0');";
 
 		try {
+			//DBへ接続
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			connect = DriverManager.getConnection(URL, USERNAME, PASSWORD2);
 			stmt = connect.createStatement();
 			stmt.executeUpdate(InsQuery);
 
+			//接続したDBを閉じる
 			stmt.close();
 			connect.close();
 		} catch (SQLException e) {
@@ -66,6 +72,7 @@ public class AddCommitBL extends HttpServlet {
 			e.printStackTrace();
 		}
 
+		//ListBLへ推移
 		getServletContext().getRequestDispatcher("/ListBL").forward(request, response);
 	}
 
