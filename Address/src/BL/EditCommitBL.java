@@ -51,7 +51,7 @@ public class EditCommitBL extends HttpServlet {
 		String categoryid = request.getParameter("categoryid");
 
 		//ハイフンをなくす
-		tel = tel.replace("-", "");
+		tel = (tel.equals("")) ? tel : tel.replace("-", "");
 
 		//SQL文の作成
 		UpdQuery = "update `jyusyoroku` set `name` = '" + name + "', `address` = '" + address + "', `tel` = '" + tel
@@ -60,7 +60,7 @@ public class EditCommitBL extends HttpServlet {
 		try {
 			//DBへ接続
 			Class.forName("com.mysql.cj.jdbc.Driver");
-			connect = DriverManager.getConnection(URL, USERNAME, PASSWORD2);
+			connect = DriverManager.getConnection(URL, USERNAME, PASSWORD);
 			stmt = connect.createStatement();
 			stmt.executeUpdate(UpdQuery);
 
@@ -73,7 +73,7 @@ public class EditCommitBL extends HttpServlet {
 			e.printStackTrace();
 		}
 
-		//ListBLへ推移
+		//ListBLへ遷移
 		getServletContext().getRequestDispatcher("/ListBL").forward(request, response);
 	}
 

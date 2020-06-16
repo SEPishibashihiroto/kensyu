@@ -25,6 +25,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" href="style.css">
 <title>削除画面</title>
 </head>
 <body>
@@ -32,7 +33,7 @@
 	<br>
 
 <!-- List.jspで削除ボタンが押されたid番号の値を表示
-	 また、OKボタンが押されたらid、telの値を持ってDeletCommitBLへ推移
+	 また、OKボタンが押されたらid、telの値を持ってDeletCommitBLへ遷移
  -->
 	<form action="./DeletCommitBL" method="get">
 		<input type="hidden" name="id" value="<%=id%>">
@@ -48,12 +49,12 @@
 		<p>
 			カテゴリ：<%=category%>
 		</p>
-		<input type="submit" value="OK" style="background-color: #777777;">
+		<input type="submit" value="OK" class="btn">
 	</form>
 
-	<!-- ボタンが押されたら住所録一覧画面へ推移 -->
+	<!-- ボタンが押されたら住所録一覧画面へ遷移 -->
 	<form action="./ListBL">
-		<input type="submit" value="キャンセル" style="background-color: #777777;">
+		<input type="submit" value="キャンセル" class="btn">
 	</form>
 </body>
 </html>

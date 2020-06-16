@@ -1,0 +1,144 @@
+
+<!--
+ページ全体に共通の処理　ここから
+
+
+-->
+ @charset "UTF-8";
+
+* {
+	margin: 0;
+	padding: 0;
+}
+
+head {
+	width: 960px;
+	margin: 0 auto;
+}
+
+body {
+	width: 960px;
+	margin: 0 50px;
+}
+
+.btn {
+	background-color: #777777;
+	border: 1px solid #000;
+	padding: 3px 5px;
+}
+
+<!--
+ページ全体に共通の処理　ここまで --><!--Listの処理　ここから -->.serchbtn {
+	background-color: #fff;
+	border: 1px solid #000;
+	padding: 3px 5px;
+}
+
+table th, td {
+	width: 900px;
+	height: 50px;
+	padding: 3px 5px;
+}
+
+table th {
+	background-color: #75A9FF;
+	text-align: center;
+}
+
+.tid {
+	width: 2%;
+}
+
+.tname {
+	width: 20%;
+	text-align: center;
+}
+
+.tadres {
+	width: 33%;
+	text-align: center;
+}
+
+.ttel {
+	width: 20%;
+	text-align: center;
+}
+
+.tcategory {
+	width: 15%;
+	text-align: center;
+}
+
+.tbrank {
+	width: 10%;
+}
+
+.tbtn {
+	display: block;
+}
+<!--
+Listの処理　ここまで
+
+
+
+-->
+<!--
+Addの処理　ここから
+
+
+
+-->
+<!--
+Addの処理　ここまで
+
+
+
+-->
+<!--
+AddCheckの処理　ここから
+
+
+
+-->
+<!--
+AddCheckの処理　ここまで
+
+
+
+-->
+<!--
+Editの処理　ここから
+
+
+
+-->
+<!--
+Editの処理　ここまで
+
+
+
+-->
+<!--
+EditCheckの処理　ここから
+
+
+
+-->
+<!--
+EditCheckの処理　ここまで
+
+
+
+-->
+<!--
+Deleteの処理　ここから
+
+
+
+-->
+<!--
+Deleteの処理　ここまで
+
+
+
+-->

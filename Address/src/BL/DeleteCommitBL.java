@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletResponse;
  * Servlet implementation class DeletCommitBL
  */
 @WebServlet("/DeletCommitBL")
-public class DeletCommitBL extends HttpServlet {
+public class DeleteCommitBL extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static final String URL = "jdbc:mysql://localhost:3306/ishibashi?serverTimezone=JST";
 	private static final String USERNAME = "root";
@@ -27,7 +27,7 @@ public class DeletCommitBL extends HttpServlet {
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public DeletCommitBL() {
+	public DeleteCommitBL() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -46,14 +46,18 @@ public class DeletCommitBL extends HttpServlet {
 
 		//値を取得
 		id = request.getParameter("id");
-		String tel = request.getParameter("tel").replace("-", "");//値を取得し、ハイフンをなくす
+		String tel = request.getParameter("tel");
+
+		//ハイフンをなくす
+		tel = (tel.equals("")) ? tel : tel.replace("-", "");
+
 		//SQL文の作成
 		UpdQuery = "update `jyusyoroku` set `delete_flg` = '" + 1 + "' where `jyusyoroku`.`id` = " + id + ";";
 
 		try {
 			//DBへ接続
 			Class.forName("com.mysql.cj.jdbc.Driver");
-			connect = DriverManager.getConnection(URL, USERNAME, PASSWORD2);
+			connect = DriverManager.getConnection(URL, USERNAME, PASSWORD);
 			stmt = connect.createStatement();
 			stmt.executeUpdate(UpdQuery);
 
@@ -66,7 +70,7 @@ public class DeletCommitBL extends HttpServlet {
 			e.printStackTrace();
 		}
 
-		//ListBLへ推移
+		//ListBLへ遷移
 		getServletContext().getRequestDispatcher("/ListBL").forward(request, response);
 	}
 

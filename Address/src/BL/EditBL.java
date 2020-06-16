@@ -55,7 +55,7 @@ public class EditBL extends HttpServlet {
 		request.setAttribute("errmsg", errmsg);
 
 		if (errmsg.equals("")) {
-			//エラーが無ければEditCheckへ推移
+			//エラーが無ければEditCheckへ遷移
 			getServletContext().getRequestDispatcher("/EditCheck.jsp").forward(request, response);
 		} else {
 			//エラーがあったらもう一度入力する

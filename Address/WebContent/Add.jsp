@@ -35,6 +35,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" href="style.css">
 <title>住所録登録</title>
 </head>
 <body>
@@ -57,7 +58,7 @@
 
 
 	<!-- テキストボックスに入力してもらい、
-		 入力された値を持ってAddBLへ推移
+		 入力された値を持ってAddBLへ遷移
 	 -->
 	<form action="./AddBL" method="get">
 		<p>
@@ -85,12 +86,12 @@
 				%>
 			</select>
 		</p>
-		<input type="submit" value="確認" style="background-color: #777777;">
+		<input type="submit" value="確認" class="btn">
 	</form>
 
-	<!-- ListBLへ推移 -->
+	<!-- ListBLへ遷移 -->
 	<form action="./ListBL">
-		<input type="submit" value="戻る" style="background-color: #777777;">
+		<input type="submit" value="戻る" class="btn">
 	</form>
 </body>
 </html>

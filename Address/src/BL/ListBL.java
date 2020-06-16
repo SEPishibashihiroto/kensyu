@@ -38,11 +38,12 @@ public class ListBL extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-
+		//ページングに関する値を取得
 		String pagerq = request.getParameter("page");
+		//住所検索に関する値を取得
 		String senarq = request.getParameter("SerchName");
 
+		//宣言
 		Connection connect;
 		Statement stmt;
 		ResultSet rs = null;
@@ -54,38 +55,48 @@ public class ListBL extends HttpServlet {
 		int limitSta;
 
 		try {
+			//値の代入及びDBへ接続
 			nowPage = pagerq == null ? "1" : pagerq;
 			limitSta = (Integer.parseInt(nowPage) - 1) * 10;
 			request.setCharacterEncoding("UTF-8");
 
 			Class.forName("com.mysql.cj.jdbc.Driver");
 
-			connect = DriverManager.getConnection(URL, USERNAME, PASSWORD2);
+			connect = DriverManager.getConnection(URL, USERNAME, PASSWORD);
 			stmt = connect.createStatement();
+
+			//データが何件あるかを調べるSQL
 			CntQuery = "select count(*) as cnt from jyusyoroku;";
 			rs = stmt.executeQuery(CntQuery);
 			rs.next();
 			listCnt = rs.getInt("cnt");
+
+			//接続したDBを閉じる
 			rs.close();
 
+			//住所検索があったかどうかを調べる
 			if (senarq == null) {
+				//住所検索がなかった場合全データを1ページに10件ずつ表示
 				SelectQuery = "select id,name,address,tel,categoryname from jyusyoroku join category on jyusyoroku.categoryid = category.categoryid where delete_flg = 0  order by id asc limit "
 						+ limitSta + ",10;";
 			} else {
+				//住所検索があった場合検索結果を1ページに10件ずつ表示
 				SerchName = "'%" + senarq + "%'";
 				SelectQuery = "select id,name,address,tel,categoryname from jyusyoroku join category on jyusyoroku.categoryid = category.categoryid where address like " +  SerchName
 						+ " and delete_flg = 0 order by id asc  limit " + limitSta + ",10;";
 			}
-			rs = stmt.executeQuery(SelectQuery);			//リクエストの追加
+			//DBへ接続
+			rs = stmt.executeQuery(SelectQuery);
+
+
+
+			//リクエストの追加
 			request.setAttribute("ListCnt", listCnt);
 			request.setAttribute("Result", rs);
 			request.setAttribute("page", nowPage);
 
+			//List.jspへ遷移
 			getServletContext().getRequestDispatcher("/List.jsp").forward(request, response);
-
-			rs.close();
-			stmt.close();
-			connect.close();
 
 		} catch (SQLException e) {
 			e.printStackTrace();

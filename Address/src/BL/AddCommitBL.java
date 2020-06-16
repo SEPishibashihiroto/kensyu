@@ -50,7 +50,8 @@ public class AddCommitBL extends HttpServlet {
 		String categoryid = request.getParameter("categoryid");
 
 		//電話番号の-(ハイフン)をなくす
-		tel = tel.replace("-", "");
+
+		tel = (tel.equals("")) ? tel : tel.replace("-", "");
 
 		//SQL文の作成
 		InsQuery = "insert into `jyusyoroku` (`id`, `name`, `address`, `tel`, `categoryid`, `delete_flg`) values (null, '"
@@ -59,7 +60,7 @@ public class AddCommitBL extends HttpServlet {
 		try {
 			//DBへ接続
 			Class.forName("com.mysql.cj.jdbc.Driver");
-			connect = DriverManager.getConnection(URL, USERNAME, PASSWORD2);
+			connect = DriverManager.getConnection(URL, USERNAME, PASSWORD);
 			stmt = connect.createStatement();
 			stmt.executeUpdate(InsQuery);
 
@@ -72,7 +73,7 @@ public class AddCommitBL extends HttpServlet {
 			e.printStackTrace();
 		}
 
-		//ListBLへ推移
+		//ListBLへ遷移
 		getServletContext().getRequestDispatcher("/ListBL").forward(request, response);
 	}
 

@@ -20,7 +20,6 @@ public class Common {
 		final String ERRMSG_ADDRESS02 = "住所は必須項目です";
 		final String ERRMSG_TEL01 = "電話番号は「000-0000-0000」の形式で入力してください";
 		String returnVal = "";
-
 		//エラーがないかチェック
 		if (name.length() > 40) {
 			returnVal = ERRMSG_NAME01 + "<br>";
@@ -30,7 +29,7 @@ public class Common {
 			returnVal = ERRMSG_ADDRESS01 + "<br>";
 		} else if (address.length() == 0) {
 			returnVal = ERRMSG_ADDRESS02 + "<br>";
-		} else if (tel != null) {
+		} else if (!(tel.equals(""))) {
 			if (!(tel.length() > 0 && tel.matches("^\\d{3}-\\d{4}-\\d{4}$"))) {
 				returnVal = ERRMSG_TEL01 + "<br>";
 			}
@@ -44,7 +43,7 @@ public class Common {
 		try {
 			//DBへ接続
 			Class.forName("com.mysql.cj.jdbc.Driver");
-			Connection connect = DriverManager.getConnection(URL, USERNAME, PASSWORD2);
+			Connection connect = DriverManager.getConnection(URL, USERNAME, PASSWORD);
 			Statement stmt = connect.createStatement();
 			getQuery = "select categoryid,categoryname from category order by categoryid asc;";
 			ResultSet rs = stmt.executeQuery(getQuery);
@@ -66,7 +65,7 @@ public class Common {
 		try {
 			//DBへ接続
 			Class.forName("com.mysql.cj.jdbc.Driver");
-			Connection connect = DriverManager.getConnection(URL, USERNAME, PASSWORD2);
+			Connection connect = DriverManager.getConnection(URL, USERNAME, PASSWORD);
 			stmt = connect.createStatement();
 			getQuery = "select categoryid,categoryname from category where categoryid=" + id + ";";
 			ResultSet rs = stmt.executeQuery(getQuery);

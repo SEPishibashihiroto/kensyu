@@ -14,20 +14,21 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" href="style.css">
 <title>住所録一覧</title>
 </head>
 <body>
 	<h1>住所管理システム：住所録一覧</h1>
 
-	<!-- 登録画面へ推移するためのボタン -->
+	<!-- 登録画面へ遷移するためのボタン -->
 	<form action="Add.jsp">
-		<input type="submit" value="新規登録" style="background-color: #777777;">
+		<input type="submit" value="新規登録"  class="btn">
 	</form>
 
 	<!-- 住所を検索し、絞り込むためのテキストボックス、ボタン -->
 	<form action="./ListBL">
-		<input type="text" name="SerchName"> <input type="submit"
-			value="検索" style="background-color: #777777;">
+		<p>住所：</p><input type="text" name="SerchName"><br> <input type="submit"
+			value="検索" class="serchbtn">
 	</form>
 
 
@@ -153,14 +154,14 @@
 
 	<!-- 住所録一覧のテーブル -->
 	<table border="1"
-		style="border-collapse: collapse; border-color: black">
+		style="border-collapse: collapse; border-color: black; width:80%;">
 		<tr>
-			<th style="background-color: #75A9FF;">No.</th>
-			<th style="background-color: #75A9FF;">名前</th>
-			<th style="background-color: #75A9FF;">住所</th>
-			<th style="background-color: #75A9FF;">電話番号</th>
-			<th style="background-color: #75A9FF;">カテゴリ</th>
-			<th colspan="2" style="background-color: #75A9FF;"></th>
+			<th class="tid">No.</th>
+			<th class="tname">名前</th>
+			<th class="tadres">住所</th>
+			<th class="ttel">電話番号</th>
+			<th class="tcategory">カテゴリ</th>
+			<th colspan="2" class="tbrank"></th>
 		</tr>
 		<!-- ListBLで行ったリザルトを実行 -->
 		<%
@@ -168,34 +169,36 @@
 				int id = rs.getInt("id");
 				String name = rs.getString("name");
 				String address = rs.getString("address");
-				String tel = new StringBuilder(rs.getString("tel")).insert(3, "-").insert(8, "-").toString();
+				String tel = (rs.getString("tel").equals("")) ? rs.getString("tel")
+						: new StringBuilder(rs.getString("tel")).insert(3, "-").insert(8, "-").toString();
 				String cname = rs.getString("categoryname");
 		%>
 
 		<tr>
-			<td><%=id%></td>
-			<td><%=name%></td>
-			<td><%=address%></td>
-			<td><%=tel%></td>
-			<td><%=cname%></td>
+			<td class="tid"><%=id%></td>
+			<td class="tname"><%=name%></td>
+			<td class="tadres"><%=address%></td>
+			<td class="ttel"><%=tel%></td>
+			<td class="tcategory"><%=cname%></td>
 			<td>
 				<!--
 					編集画面へ行くためのボタン
-					id、name、address、tel、cnameを持ってEdit.jspへ推移
+					id、name、address、tel、cnameを持ってEdit.jspへ遷移
 				 -->
 				<form action="Edit.jsp" name="<%="ed" + id%>">
-					<input type="hidden" name="id" value="<%=id%>"> <input
-						type="hidden" name="name" value="<%=name%>"> <input
-						type="hidden" name="address" value="<%=address%>"> <input
-						type="hidden" name="tel" value="<%=tel%>"> <input
-						type="hidden" name="category" value="<%=cname%>"> <input
-						type="submit" value="編集" style="background-color: #777777;">
+					<input type="hidden" name="id" value="<%=id%>">
+					<input type="hidden" name="name" value="<%=name%>">
+					<input type="hidden" name="address" value="<%=address%>">
+					<input type="hidden" name="tel" value="<%=tel%>">
+					<input type="hidden" name="category" value="<%=cname%>">
+					<input type="hidden" name="errmsg" value="<%=""%>">
+					<input type="submit" value="編集"  class="btn tbtn">
 				</form>
 			</td>
 			<td>
 				<!--
 					削除画面へ行くためのボタン
-					idを持ってDelete.jspへ推移
+					idを持ってDelete.jspへ遷移
 				 -->
 				<form action="Delete.jsp" name="<%="del" + id%>" method="get">
 					<input type="hidden" name="id" value="<%=id%>"> <input
@@ -203,7 +206,7 @@
 						type="hidden" name="address" value="<%=address%>"> <input
 						type="hidden" name="tel" value="<%=tel%>"> <input
 						type="hidden" name="category" value="<%=cname%>"> <input
-						type="submit" value="削除" style="background-color: #777777;">
+						type="submit" value="削除"  class="btn tbtn">
 				</form>
 			</td>
 		</tr>
@@ -334,9 +337,9 @@
 	%>
 	<!-- ページング処理  ここまで -->
 
-	<!-- 登録画面へ推移するためのボタン -->
+	<!-- 登録画面へ遷移するためのボタン -->
 	<form action="Add.jsp">
-		<input type="submit" value="新規登録" style="background-color: #777777;">
+		<input type="submit" value="新規登録"  class="btn">
 	</form>
 
 

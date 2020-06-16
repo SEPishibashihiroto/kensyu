@@ -54,7 +54,7 @@ public class AddBL extends HttpServlet {
 		request.setAttribute("categoryid", categoryid);
 		request.setAttribute("errmsg", errmsg);
 
-		//画面推移
+		//画面遷移
 		if (errmsg.equals("")) {
 			//何もエラーがない場合確認画面へ
 			getServletContext().getRequestDispatcher("/AddCheck.jsp").forward(request, response);
