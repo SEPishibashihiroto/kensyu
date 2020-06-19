@@ -68,16 +68,23 @@
 		</p>
 		<p>
 			カテゴリ： <select name="categoryid">
-				<option value="0"></option>
 				<!-- getCategoryAll()で取得した結果をここで表示 -->
 				<%
 					while (rs.next()) {
 						String cid = rs.getString("categoryid");
 						String cname = rs.getString("categoryname");
-				%><option value="<%=cid%>">
-					<%=cname%>
-				</option>
-				<%
+						if(cname.equals(catename)){
+							%><option value="<%=cid%>" selected>
+							<%=cname%>
+						</option>
+						<%
+						}else{
+							%><option value="<%=cid%>">
+							<%=cname%>
+						</option>
+						<%
+						}
+
 					}
 				%>
 			</select>

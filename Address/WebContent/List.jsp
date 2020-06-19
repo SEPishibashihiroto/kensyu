@@ -9,6 +9,8 @@
 	String nowPage = (String) request.getAttribute("page");
 	int maxPage = listCnt % 10 == 0 ? listCnt / 10 : listCnt / 10 + 1;
 	int nowpage = Integer.parseInt(nowPage);
+	String SerchName = request.getAttribute("SerchName") == null ? ""
+			: (String) request.getAttribute("SerchName");
 %>
 <!DOCTYPE html>
 <html>
@@ -22,15 +24,28 @@
 
 	<!-- 登録画面へ遷移するためのボタン -->
 	<form action="Add.jsp">
-		<input type="submit" value="新規登録"  class="btn">
+		<input type="submit" value="新規登録" class="btn">
 	</form>
 
 	<!-- 住所を検索し、絞り込むためのテキストボックス、ボタン -->
 	<form action="./ListBL">
-		<p>住所：</p><input type="text" name="SerchName"><br> <input type="submit"
-			value="検索" class="serchbtn">
+		<p>住所：</p>
+		<input type="text" name="SerchName"><br> <input
+			type="submit" value="検索" class="serchbtn">
 	</form>
 
+	<!-- 何で住所検索したか -->
+	<%
+		if (!(SerchName.equals(""))) {
+	%>
+	<p>
+		「
+		<%=SerchName%>
+		」での検索......
+	</p>
+	<%
+		}
+	%>
 
 	<!-- ページング処理　ここから -->
 	<%
@@ -46,7 +61,7 @@
 	<%
 		} else {
 	%>
-	<a href="ListBL?page=<%=i%>"><%=i + " |　"%></a>
+	<a href="ListBL?page=<%=i%>&SerchName=<%=SerchName%>"><%=i + " |　"%></a>
 	<%
 		}
 	%>
@@ -54,60 +69,29 @@
 	<%
 		}
 	%>
-	<a href="ListBL?page=<%=nowpage + 1%>"><%=">　"%></a>
-	<a href="ListBL?page=<%=maxPage%>"><%=">>　"%></a>
+
 	<%
-		} else if (nowpage == 2) {//2ページ目の処理
+		if (nowpage == maxPage) {
 	%>
-	<a href="ListBL?page=1"><%="<<　"%></a>
-	<a href="ListBL?page=<%=nowpage - 1%>"><%="<　"%></a>
-	<%
-		for (int i = nowpage - 1; i <= maxPage && i <= 5; i++) {
-				if (i == nowpage) {
-	%>
-	<a><%=i + " |　"%></a>
+	<a><%=">　"%></a>
+	<a><%=">>　"%></a>
 	<%
 		} else {
 	%>
-	<a href="ListBL?page=<%=i%>"><%=i + " |　"%></a>
-	<%
-		}
-	%>
+	<a href="ListBL?page=<%=nowpage + 1%>&SerchName=<%=SerchName%>"><%=">　"%></a>
+	<a href="ListBL?page=<%=maxPage%>&SerchName=<%=SerchName%>"><%=">>　"%></a>
 	<%
 		}
 	%>
 
-	<a href="ListBL?page=<%=maxPage%>"><%=">>　"%></a>
-	<%
-		} else if (nowpage == maxPage - 1) {//最終ページの1ページ前の処理
-	%>
-	<a href="ListBL?page=1"><%="<<　"%></a>
-	<a href="ListBL?page=<%=nowpage - 1%>"><%="<　"%></a>
-	<%
-		for (int i = maxPage - 4; i <= maxPage; i++) {
-				if (i == nowpage) {
-	%>
-	<a><%=i + " |　"%></a>
-	<%
-		} else {
-	%>
-	<a href="ListBL?page=<%=i%>"><%=i + " |　"%></a>
-	<%
-		}
-	%>
-	<%
-		}
-	%>
-	<a href="ListBL?page=<%=nowPage + 1%>"><%=">　"%></a>
-	<a href="ListBL?page=<%=maxPage%>"><%=">>　"%></a>
 
 	<%
 		} else if (nowpage == maxPage) {//最終ページの処理
 	%>
-	<a href="ListBL?page=1"><%="<<　"%></a>
-	<a href="ListBL?page=<%=nowpage - 1%>"><%="<　"%></a>
+	<a href="ListBL?page=1&SerchName=<%=SerchName%>"><%="<<　"%></a>
+	<a href="ListBL?page=<%=nowpage - 1%>&SerchName=<%=SerchName%>"><%="<　"%></a>
 	<%
-		int n = maxPage == 2 ? 1 : 4;
+		int n = maxPage < 5 ? maxPage - 1 : 4;
 			for (int i = nowpage - n; i <= nowpage; i++) {
 				if (i == nowpage) {
 	%>
@@ -115,7 +99,7 @@
 	<%
 		} else {
 	%>
-	<a href="ListBL?page=<%=i%>"><%=i + " |　"%></a>
+	<a href="ListBL?page=<%=i%>&SerchName=<%=SerchName%>"><%=i + " |　"%></a>
 	<%
 		}
 	%>
@@ -124,11 +108,58 @@
 	%>
 	<a><%=">　"%></a>
 	<a><%=">>　"%></a>
+
+	<%
+		} else if (nowpage == 2) {//2ページ目の処理
+	%>
+	<a href="ListBL?page=1&SerchName=<%=SerchName%>"><%="<<　"%></a>
+	<a href="ListBL?page=1&SerchName=<%=SerchName%>"><%="<　"%></a>
+	<%
+		for (int i = nowpage - 1; i <= maxPage && i <= 5; i++) {
+				if (i == nowpage) {
+	%>
+	<a><%=i + " |　"%></a>
+	<%
+		} else {
+	%>
+	<a href="ListBL?page=<%=i%>&SerchName=<%=SerchName%>"><%=i + " |　"%></a>
+	<%
+		}
+	%>
+	<%
+		}
+	%>
+	<a href="ListBL?page=<%=nowpage + 1%>&SerchName=<%=SerchName%>"><%=">　"%></a>
+	<a href="ListBL?page=<%=maxPage%>&SerchName=<%=SerchName%>"><%=">>　"%></a>
+	<%
+		} else if (nowpage == maxPage - 1) {//最終ページの1ページ前の処理
+	%>
+	<a href="ListBL?page=1&SerchName=<%=SerchName%>"><%="<<　"%></a>
+	<a href="ListBL?page=<%=nowpage - 1%>&SerchName=<%=SerchName%>"><%="<　"%></a>
+	<%
+		for (int i = maxPage - 4; i <= maxPage; i++) {
+				if (i == nowpage) {
+	%>
+	<a><%=i + " |　"%></a>
+	<%
+		} else {
+	%>
+	<a href="ListBL?page=<%=i%>&SerchName=<%=SerchName%>"><%=i + " |　"%></a>
+	<%
+		}
+	%>
+	<%
+		}
+	%>
+	<a href="ListBL?page=<%=maxPage%>&SerchName=<%=SerchName%>"><%=">　"%></a>
+	<a href="ListBL?page=<%=maxPage%>&SerchName=<%=SerchName%>"><%=">>　"%></a>
+
+
 	<%
 		} else {//それ以外のページの処理
 	%>
-	<a href="ListBL?page=1"><%="<<　"%></a>
-	<a href="ListBL?page=<%=nowpage - 1%>"><%="<　"%></a>
+	<a href="ListBL?page=1&SerchName=<%=SerchName%>"><%="<<　"%></a>
+	<a href="ListBL?page=<%=nowpage - 1%>&SerchName=<%=SerchName%>"><%="<　"%></a>
 	<%
 		int n = nowpage == 2 ? 1 : 2;
 			for (int i = nowpage - n; i <= maxPage && i <= nowpage + 2; i++) {
@@ -138,15 +169,16 @@
 	<%
 		} else {
 	%>
-	<a href="ListBL?page=<%=i%>"><%=i + " |　"%></a>
+	<a href="ListBL?page=<%=i%>&SerchName=<%=SerchName%>"><%=i + " |　"%></a>
 	<%
 		}
 	%>
 	<%
 		}
 	%>
-	<a href="ListBL?page=<%=nowpage == maxPage ? maxPage : nowpage - 1%>"><%=">　"%></a>
-	<a href="ListBL?page=<%=maxPage%>"><%=">>　"%></a>
+	<a
+		href="ListBL?page=<%=nowpage == maxPage ? maxPage : nowpage + 1%>&SerchName=<%=SerchName%>"><%=">　"%></a>
+	<a href="ListBL?page=<%=maxPage%>&SerchName=<%=SerchName%>"><%=">>　"%></a>
 	<%
 		}
 	%>
@@ -154,7 +186,7 @@
 
 	<!-- 住所録一覧のテーブル -->
 	<table border="1"
-		style="border-collapse: collapse; border-color: black; width:80%;">
+		style="border-collapse: collapse; border-color: black; width: 80%;">
 		<tr>
 			<th class="tid">No.</th>
 			<th class="tname">名前</th>
@@ -186,13 +218,12 @@
 					id、name、address、tel、cnameを持ってEdit.jspへ遷移
 				 -->
 				<form action="Edit.jsp" name="<%="ed" + id%>">
-					<input type="hidden" name="id" value="<%=id%>">
-					<input type="hidden" name="name" value="<%=name%>">
-					<input type="hidden" name="address" value="<%=address%>">
-					<input type="hidden" name="tel" value="<%=tel%>">
-					<input type="hidden" name="category" value="<%=cname%>">
-					<input type="hidden" name="errmsg" value="<%=""%>">
-					<input type="submit" value="編集"  class="btn tbtn">
+					<input type="hidden" name="id" value="<%=id%>"> <input
+						type="hidden" name="name" value="<%=name%>"> <input
+						type="hidden" name="address" value="<%=address%>"> <input
+						type="hidden" name="tel" value="<%=tel%>"> <input
+						type="hidden" name="category" value="<%=cname%>"> <input
+						type="submit" value="編集" class="btn tbtn">
 				</form>
 			</td>
 			<td>
@@ -206,7 +237,7 @@
 						type="hidden" name="address" value="<%=address%>"> <input
 						type="hidden" name="tel" value="<%=tel%>"> <input
 						type="hidden" name="category" value="<%=cname%>"> <input
-						type="submit" value="削除"  class="btn tbtn">
+						type="submit" value="削除" class="btn tbtn">
 				</form>
 			</td>
 		</tr>
@@ -231,7 +262,7 @@
 	<%
 		} else {
 	%>
-	<a href="ListBL?page=<%=i%>"><%=i + " |　"%></a>
+	<a href="ListBL?page=<%=i%>&SerchName=<%=SerchName%>"><%=i + " |　"%></a>
 	<%
 		}
 	%>
@@ -239,60 +270,29 @@
 	<%
 		}
 	%>
-	<a href="ListBL?page=<%=nowpage + 1%>"><%=">　"%></a>
-	<a href="ListBL?page=<%=maxPage%>"><%=">>　"%></a>
+
 	<%
-		} else if (nowpage == 2) {//2ページ目の処理
+		if (nowpage == maxPage) {
 	%>
-	<a href="ListBL?page=1"><%="<<　"%></a>
-	<a href="ListBL?page=<%=nowpage - 1%>"><%="<　"%></a>
-	<%
-		for (int i = nowpage - 1; i <= maxPage && i <= 5; i++) {
-				if (i == nowpage) {
-	%>
-	<a><%=i + " |　"%></a>
+	<a><%=">　"%></a>
+	<a><%=">>　"%></a>
 	<%
 		} else {
 	%>
-	<a href="ListBL?page=<%=i%>"><%=i + " |　"%></a>
-	<%
-		}
-	%>
+	<a href="ListBL?page=<%=nowpage + 1%>&SerchName=<%=SerchName%>"><%=">　"%></a>
+	<a href="ListBL?page=<%=maxPage%>&SerchName=<%=SerchName%>"><%=">>　"%></a>
 	<%
 		}
 	%>
 
-	<a href="ListBL?page=<%=maxPage%>"><%=">>　"%></a>
-	<%
-		} else if (nowpage == maxPage - 1) {//最終ページの1ページ前の処理
-	%>
-	<a href="ListBL?page=1"><%="<<　"%></a>
-	<a href="ListBL?page=<%=nowpage - 1%>"><%="<　"%></a>
-	<%
-		for (int i = maxPage - 4; i <= maxPage; i++) {
-				if (i == nowpage) {
-	%>
-	<a><%=i + " |　"%></a>
-	<%
-		} else {
-	%>
-	<a href="ListBL?page=<%=i%>"><%=i + " |　"%></a>
-	<%
-		}
-	%>
-	<%
-		}
-	%>
-	<a href="ListBL?page=<%=nowPage + 1%>"><%=">　"%></a>
-	<a href="ListBL?page=<%=maxPage%>"><%=">>　"%></a>
 
 	<%
 		} else if (nowpage == maxPage) {//最終ページの処理
 	%>
-	<a href="ListBL?page=1"><%="<<　"%></a>
-	<a href="ListBL?page=<%=nowpage - 1%>"><%="<　"%></a>
+	<a href="ListBL?page=1&SerchName=<%=SerchName%>"><%="<<　"%></a>
+	<a href="ListBL?page=<%=nowpage - 1%>&SerchName=<%=SerchName%>"><%="<　"%></a>
 	<%
-		int n = maxPage == 2 ? 1 : 4;
+		int n = maxPage < 5 ? maxPage - 1 : 4;
 			for (int i = nowpage - n; i <= nowpage; i++) {
 				if (i == nowpage) {
 	%>
@@ -300,7 +300,7 @@
 	<%
 		} else {
 	%>
-	<a href="ListBL?page=<%=i%>"><%=i + " |　"%></a>
+	<a href="ListBL?page=<%=i%>&SerchName=<%=SerchName%>"><%=i + " |　"%></a>
 	<%
 		}
 	%>
@@ -309,11 +309,58 @@
 	%>
 	<a><%=">　"%></a>
 	<a><%=">>　"%></a>
+
+	<%
+		} else if (nowpage == 2) {//2ページ目の処理
+	%>
+	<a href="ListBL?page=1&SerchName=<%=SerchName%>"><%="<<　"%></a>
+	<a href="ListBL?page=1&SerchName=<%=SerchName%>"><%="<　"%></a>
+	<%
+		for (int i = nowpage - 1; i <= maxPage && i <= 5; i++) {
+				if (i == nowpage) {
+	%>
+	<a><%=i + " |　"%></a>
+	<%
+		} else {
+	%>
+	<a href="ListBL?page=<%=i%>&SerchName=<%=SerchName%>"><%=i + " |　"%></a>
+	<%
+		}
+	%>
+	<%
+		}
+	%>
+	<a href="ListBL?page=<%=nowpage + 1%>&SerchName=<%=SerchName%>"><%=">　"%></a>
+	<a href="ListBL?page=<%=maxPage%>&SerchName=<%=SerchName%>"><%=">>　"%></a>
+	<%
+		} else if (nowpage == maxPage - 1) {//最終ページの1ページ前の処理
+	%>
+	<a href="ListBL?page=1&SerchName=<%=SerchName%>"><%="<<　"%></a>
+	<a href="ListBL?page=<%=nowpage - 1%>&SerchName=<%=SerchName%>"><%="<　"%></a>
+	<%
+		for (int i = maxPage - 4; i <= maxPage; i++) {
+				if (i == nowpage) {
+	%>
+	<a><%=i + " |　"%></a>
+	<%
+		} else {
+	%>
+	<a href="ListBL?page=<%=i%>&SerchName=<%=SerchName%>"><%=i + " |　"%></a>
+	<%
+		}
+	%>
+	<%
+		}
+	%>
+	<a href="ListBL?page=<%=maxPage%>&SerchName=<%=SerchName%>"><%=">　"%></a>
+	<a href="ListBL?page=<%=maxPage%>&SerchName=<%=SerchName%>"><%=">>　"%></a>
+
+
 	<%
 		} else {//それ以外のページの処理
 	%>
-	<a href="ListBL?page=1"><%="<<　"%></a>
-	<a href="ListBL?page=<%=nowpage - 1%>"><%="<　"%></a>
+	<a href="ListBL?page=1&SerchName=<%=SerchName%>"><%="<<　"%></a>
+	<a href="ListBL?page=<%=nowpage - 1%>&SerchName=<%=SerchName%>"><%="<　"%></a>
 	<%
 		int n = nowpage == 2 ? 1 : 2;
 			for (int i = nowpage - n; i <= maxPage && i <= nowpage + 2; i++) {
@@ -323,15 +370,16 @@
 	<%
 		} else {
 	%>
-	<a href="ListBL?page=<%=i%>"><%=i + " |　"%></a>
+	<a href="ListBL?page=<%=i%>&SerchName=<%=SerchName%>"><%=i + " |　"%></a>
 	<%
 		}
 	%>
 	<%
 		}
 	%>
-	<a href="ListBL?page=<%=nowpage == maxPage ? maxPage : nowpage - 1%>"><%=">　"%></a>
-	<a href="ListBL?page=<%=maxPage%>"><%=">>　"%></a>
+	<a
+		href="ListBL?page=<%=nowpage == maxPage ? maxPage : nowpage + 1%>&SerchName=<%=SerchName%>"><%=">　"%></a>
+	<a href="ListBL?page=<%=maxPage%>&SerchName=<%=SerchName%>"><%=">>　"%></a>
 	<%
 		}
 	%>
@@ -339,7 +387,7 @@
 
 	<!-- 登録画面へ遷移するためのボタン -->
 	<form action="Add.jsp">
-		<input type="submit" value="新規登録"  class="btn">
+		<input type="submit" value="新規登録" class="btn">
 	</form>
 
 

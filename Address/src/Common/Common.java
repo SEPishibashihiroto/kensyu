@@ -21,19 +21,14 @@ public class Common {
 		final String ERRMSG_TEL01 = "電話番号は「000-0000-0000」の形式で入力してください";
 		String returnVal = "";
 		//エラーがないかチェック
-		if (name.length() > 40) {
-			returnVal = ERRMSG_NAME01 + "<br>";
-		} else if (name.length() == 0) {
-			returnVal = ERRMSG_NAME02 + "<br>";
-		} else if (address.length() > 80) {
-			returnVal = ERRMSG_ADDRESS01 + "<br>";
-		} else if (address.length() == 0) {
-			returnVal = ERRMSG_ADDRESS02 + "<br>";
-		} else if (!(tel.equals(""))) {
-			if (!(tel.length() > 0 && tel.matches("^\\d{3}-\\d{4}-\\d{4}$"))) {
-				returnVal = ERRMSG_TEL01 + "<br>";
-			}
-		}
+		returnVal += (name.length() > 40) ? ERRMSG_NAME01 + "<br>"
+				: (name.length() == 0) ? ERRMSG_NAME02 + "<br>" : "";
+		returnVal += (address.length() > 80) ? ERRMSG_ADDRESS01 + "<br>"
+				: (address.length() == 0) ? ERRMSG_ADDRESS02 + "<br>" : "";
+		returnVal += (tel.equals("")) ? ""
+				: (tel.length() > 0 && tel.matches("^\\d{3}-\\d{4}-\\d{4}$")) ? ""
+						: ERRMSG_TEL01 + "<br>";
+
 		return returnVal;//チェックの結果を返す
 	}
 

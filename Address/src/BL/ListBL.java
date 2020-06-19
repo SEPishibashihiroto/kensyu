@@ -51,7 +51,7 @@ public class ListBL extends HttpServlet {
 		String SelectQuery;
 		String CntQuery;
 		String nowPage;
-		String SerchName;
+		String SerchName = "";
 		int limitSta;
 
 		try {
@@ -65,35 +65,47 @@ public class ListBL extends HttpServlet {
 			connect = DriverManager.getConnection(URL, USERNAME, PASSWORD);
 			stmt = connect.createStatement();
 
-			//データが何件あるかを調べるSQL
-			CntQuery = "select count(*) as cnt from jyusyoroku;";
-			rs = stmt.executeQuery(CntQuery);
-			rs.next();
-			listCnt = rs.getInt("cnt");
-
-			//接続したDBを閉じる
-			rs.close();
-
 			//住所検索があったかどうかを調べる
 			if (senarq == null) {
+				//データが何件あるかを調べるSQL
+				CntQuery = "select count(*) as cnt from jyusyoroku;";
+				rs = stmt.executeQuery(CntQuery);
+				rs.next();
+				listCnt = rs.getInt("cnt");
+
+				//接続したDBを閉じる
+				rs.close();
+
 				//住所検索がなかった場合全データを1ページに10件ずつ表示
 				SelectQuery = "select id,name,address,tel,categoryname from jyusyoroku join category on jyusyoroku.categoryid = category.categoryid where delete_flg = 0  order by id asc limit "
 						+ limitSta + ",10;";
 			} else {
+
 				//住所検索があった場合検索結果を1ページに10件ずつ表示
 				SerchName = "'%" + senarq + "%'";
-				SelectQuery = "select id,name,address,tel,categoryname from jyusyoroku join category on jyusyoroku.categoryid = category.categoryid where address like " +  SerchName
+				SelectQuery = "select id,name,address,tel,categoryname from jyusyoroku join category on jyusyoroku.categoryid = category.categoryid where address like "
+						+ SerchName
 						+ " and delete_flg = 0 order by id asc  limit " + limitSta + ",10;";
+
+				//データが何件あるかを調べるSQL
+				CntQuery = "select count(*) as cnt from jyusyoroku join category on jyusyoroku.categoryid = category.categoryid where address like "
+						+ SerchName +
+						" and delete_flg = 0 order by id asc;";
+				rs = stmt.executeQuery(CntQuery);
+				rs.next();
+				listCnt = rs.getInt("cnt");
+
+				//接続したDBを閉じる
+				rs.close();
 			}
 			//DBへ接続
 			rs = stmt.executeQuery(SelectQuery);
-
-
 
 			//リクエストの追加
 			request.setAttribute("ListCnt", listCnt);
 			request.setAttribute("Result", rs);
 			request.setAttribute("page", nowPage);
+			request.setAttribute("SerchName", senarq);
 
 			//List.jspへ遷移
 			getServletContext().getRequestDispatcher("/List.jsp").forward(request, response);

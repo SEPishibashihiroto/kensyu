@@ -72,7 +72,6 @@
 		</p>
 		<p>
 			カテゴリ： <select name="categoryid">
-			<option value="0"></option>
 				<!-- getCategoryAll()で取得した結果をここで表示 -->
 				<%
 					while (rs.next()) {
