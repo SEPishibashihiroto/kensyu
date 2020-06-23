@@ -1,10 +1,5 @@
-
-<!--
-ページ全体に共通の処理　ここから
-
-
--->
- @charset "UTF-8";
+/*すべてに共通する部分　ここから*/
+@charset "UTF-8";
 
 * {
 	margin: 0;
@@ -18,7 +13,7 @@ head {
 
 body {
 	width: 960px;
-	margin: 0 50px;
+	margin: 0 auto;
 }
 
 .btn {
@@ -27,46 +22,59 @@ body {
 	padding: 3px 5px;
 }
 
-<!--
-ページ全体に共通の処理　ここまで --><!--Listの処理　ここから -->.serchbtn {
-	background-color: #fff;
-	border: 1px solid #000;
-	padding: 3px 5px;
+/*すべてに共通する部分　ここまで*/
+/*List　ここから*/
+navmenu{
+	height:200px;
+	margin:10px 0;
+
 }
 
 table th, td {
-	width: 900px;
+	width: 950px;
 	height: 50px;
-	padding: 3px 5px;
+	border:1px solid #000;
 }
 
 table th {
 	background-color: #75A9FF;
 	text-align: center;
+	padding: 3px 5px;
 }
 
 .tid {
 	width: 2%;
+	padding: 3px 5px;
 }
 
 .tname {
 	width: 20%;
 	text-align: center;
+	padding: 3px 5px;
 }
 
 .tadres {
 	width: 33%;
 	text-align: center;
+	padding: 3px 5px;
+}
+
+.tadresth:hover {
+	background-color: red;
+	text-align: center;
+	padding: 3px 5px;
 }
 
 .ttel {
 	width: 20%;
 	text-align: center;
+	padding: 3px 5px;
 }
 
 .tcategory {
 	width: 15%;
 	text-align: center;
+	padding: 3px 5px;
 }
 
 .tbrank {
@@ -75,70 +83,43 @@ table th {
 
 .tbtn {
 	display: block;
+	text-align:center;
 }
-<!--
-Listの処理　ここまで
 
+.serch {
+	background-color: #fff;
+	border: 1px solid #000;
+	padding: 3px 5px;
+	width: 200px;
+}
 
+.serchtext {
+	background-color: #fff;
+	border: 1px solid #000;
+	width: 198px;
+	height: 25px;
+}
 
--->
-<!--
-Addの処理　ここから
+.addbtn {
+	width: 200px;
+}
 
+.navleft {
+	display:flex;
+	justify-content: space-between;
+}
 
+.navright {
+}
 
--->
-<!--
-Addの処理　ここまで
-
-
-
--->
-<!--
-AddCheckの処理　ここから
-
-
-
--->
-<!--
-AddCheckの処理　ここまで
-
-
-
--->
-<!--
-Editの処理　ここから
-
-
-
--->
-<!--
-Editの処理　ここまで
-
-
-
--->
-<!--
-EditCheckの処理　ここから
-
-
-
--->
-<!--
-EditCheckの処理　ここまで
-
-
-
--->
-<!--
-Deleteの処理　ここから
-
-
-
--->
-<!--
-Deleteの処理　ここまで
-
-
-
--->
+/*List　ここまで*/
+/*Add　ここから*/
+/*Add　ここまで*/
+/*AddCheck　ここから*/
+/*AddCheck　ここまで*/
+/*Delete　ここから*/
+/*Delete　ここまで*/
+/*Edit　ここから*/
+/*Edit　ここまで*/
+/*EditCheck　ここから*/
+/*EditCheck　ここまで*/

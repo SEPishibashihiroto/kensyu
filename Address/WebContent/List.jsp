@@ -22,17 +22,25 @@
 <body>
 	<h1>住所管理システム：住所録一覧</h1>
 
-	<!-- 登録画面へ遷移するためのボタン -->
-	<form action="Add.jsp">
-		<input type="submit" value="新規登録" class="btn">
-	</form>
+	<div class="navmenu">
 
-	<!-- 住所を検索し、絞り込むためのテキストボックス、ボタン -->
-	<form action="./ListBL">
-		<p>住所：</p>
-		<input type="text" name="SerchName"><br> <input
-			type="submit" value="検索" class="serchbtn">
-	</form>
+		<div class="navleft">
+			<!-- 登録画面へ遷移するためのボタン -->
+			<form action="Add.jsp">
+				<input type="submit" value="新規登録" class="btn addbtn">
+			</form>
+		</div>
+
+		<div class="navright">
+			<!-- 住所を検索し、絞り込むためのテキストボックス、ボタン -->
+			<form action="./ListBL">
+				<p>住所：</p>
+				<input type="text" name="SerchName" class="serchtext"><br>
+				<input type="submit" value="検索" class="serch">
+			</form>
+		</div>
+
+	</div>
 
 	<!-- 何で住所検索したか -->
 	<%
@@ -186,7 +194,7 @@
 
 	<!-- 住所録一覧のテーブル -->
 	<table border="1"
-		style="border-collapse: collapse; border-color: black; width: 80%;">
+		style="border-collapse: collapse; border-color: black;">
 		<tr>
 			<th class="tid">No.</th>
 			<th class="tname">名前</th>
@@ -209,7 +217,7 @@
 		<tr>
 			<td class="tid"><%=id%></td>
 			<td class="tname"><%=name%></td>
-			<td class="tadres"><%=address%></td>
+			<td class="tadres tadresth"><%=address%></td>
 			<td class="ttel"><%=tel%></td>
 			<td class="tcategory"><%=cname%></td>
 			<td>
@@ -385,10 +393,12 @@
 	%>
 	<!-- ページング処理  ここまで -->
 
-	<!-- 登録画面へ遷移するためのボタン -->
-	<form action="Add.jsp">
-		<input type="submit" value="新規登録" class="btn">
-	</form>
+	<div class="headleft">
+		<!-- 登録画面へ遷移するためのボタン -->
+		<form action="Add.jsp">
+			<input type="submit" value="新規登録" class="btn addbtn">
+		</form>
+	</div>
 
 
 </body>

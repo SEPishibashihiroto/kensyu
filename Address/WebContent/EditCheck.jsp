@@ -40,6 +40,11 @@
 			電話番号：<%=tel%>
 			<input type="hidden" name="tel" value="<%=tel.equals("") ? "" : tel%>">
 		</p>
+
+		<p>
+			カテゴリ：<%=categoryname%>
+		</p>
+
 		<input type="hidden" name="id" value="<%=id%>"> <input
 			type="hidden" name="categoryid" value="<%=categoryid%>"> <input
 			type="submit" value="編集" class="btn">

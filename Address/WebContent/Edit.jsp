@@ -57,14 +57,16 @@
 	 -->
 	<form action="./EditBL">
 		<p>
-			名前：<input type="text" name="name" value="<%=name == null ? "" : name%>">
+			名前：<input type="text" name="name"
+				value="<%=name == null ? "" : name%>">
 		</p>
 		<p>
 			住所：<input type="text" name="address"
 				value="<%=address == null ? "" : address%>">
 		</p>
 		<p>
-			電話番号：<input type="text" name="tel" value="<%=tel == null ? "" : tel%>">
+			電話番号：<input type="text" name="tel"
+				value="<%=tel == null ? "" : tel%>">
 		</p>
 		<p>
 			カテゴリ： <select name="categoryid">
@@ -73,17 +75,17 @@
 					while (rs.next()) {
 						String cid = rs.getString("categoryid");
 						String cname = rs.getString("categoryname");
-						if(cname.equals(catename)){
-							%><option value="<%=cid%>" selected>
-							<%=cname%>
-						</option>
-						<%
-						}else{
-							%><option value="<%=cid%>">
-							<%=cname%>
-						</option>
-						<%
-						}
+						if (cname.equals(catename) || cid.equals(category)) {
+				%><option value="<%=cid%>" selected>
+					<%=cname%>
+				</option>
+				<%
+					} else {
+				%><option value="<%=cid%>">
+					<%=cname%>
+				</option>
+				<%
+					}
 
 					}
 				%>
