@@ -51,53 +51,60 @@
 	<%
 		}
 	%>
-
-	<!-- テキストボックスに入力してもらい、
+	<div class="checkbtn">
+		<!-- テキストボックスに入力してもらい、
 		 入力された値を持ってEditBLへ遷移
 	 -->
-	<form action="./EditBL">
-		<p>
-			名前：<input type="text" name="name"
-				value="<%=name == null ? "" : name%>">
-		</p>
-		<p>
-			住所：<input type="text" name="address"
-				value="<%=address == null ? "" : address%>">
-		</p>
-		<p>
-			電話番号：<input type="text" name="tel"
-				value="<%=tel == null ? "" : tel%>">
-		</p>
-		<p>
-			カテゴリ： <select name="categoryid">
-				<!-- getCategoryAll()で取得した結果をここで表示 -->
-				<%
-					while (rs.next()) {
-						String cid = rs.getString("categoryid");
-						String cname = rs.getString("categoryname");
-						if (cname.equals(catename) || cid.equals(category)) {
-				%><option value="<%=cid%>" selected>
-					<%=cname%>
-				</option>
-				<%
-					} else {
-				%><option value="<%=cid%>">
-					<%=cname%>
-				</option>
-				<%
-					}
+		<form action="./EditBL">
+			<div class="text">
+				<p class="namebox">
+					名前：<input type="text" name="name"
+						value="<%=name == null ? "" : name%>">
+				</p>
+				<p class="adresbox">
+					住所：<input type="text" name="address"
+						value="<%=address == null ? "" : address%>">
+				</p>
+				<p>
+					電話番号：<input type="text" name="tel"
+						value="<%=tel == null ? "" : tel%>">
+				</p>
+				<p>
+					カテゴリ： <select name="categoryid">
+						<!-- getCategoryAll()で取得した結果をここで表示 -->
+						<%
+							while (rs.next()) {
+								String cid = rs.getString("categoryid");
+								String cname = rs.getString("categoryname");
+								if (cname.equals(catename) || cid.equals(category)) {
+						%><option value="<%=cid%>" selected>
+							<%=cname%>
+						</option>
+						<%
+							} else {
+						%><option value="<%=cid%>">
+							<%=cname%>
+						</option>
+						<%
+							}
 
-					}
-				%>
-			</select>
-		</p>
-		<input type="hidden" name="id" value="<%=id%>"> <input
-			type="submit" value="確認" class="btn">
-	</form>
+							}
+						%>
+					</select>
+				</p>
+			</div>
+			<input type="hidden" name="id" value="<%=id%>"> <input
+				type="submit" value="確認" class="btn editbtn">
+		</form>
+	</div>
 
-	<!-- ListBLへ遷移 -->
-	<form action="./ListBL">
-		<input type="submit" value="戻る" class="btn">
-	</form>
+	<div class="returnbtn">
+		<!-- ListBLへ遷移 -->
+		<form action="./ListBL">
+			<input type="submit" value="戻る" class="btn editbtn">
+		</form>
+
+	</div>
+
 </body>
 </html>

@@ -60,7 +60,7 @@ public class EditCommitBL extends HttpServlet {
 		try {
 			//DBへ接続
 			Class.forName("com.mysql.cj.jdbc.Driver");
-			connect = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+			connect = DriverManager.getConnection(URL, USERNAME, PASSWORD2);
 			stmt = connect.createStatement();
 			stmt.executeUpdate(UpdQuery);
 

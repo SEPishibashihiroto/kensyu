@@ -21,15 +21,24 @@ public class Common {
 		final String ERRMSG_TEL01 = "電話番号は「000-0000-0000」の形式で入力してください";
 		String returnVal = "";
 		//エラーがないかチェック
-		returnVal += (name.length() > 40) ? ERRMSG_NAME01 + "<br>"
-				: (name.length() == 0) ? ERRMSG_NAME02 + "<br>" : "";
-		returnVal += (address.length() > 80) ? ERRMSG_ADDRESS01 + "<br>"
-				: (address.length() == 0) ? ERRMSG_ADDRESS02 + "<br>" : "";
+		returnVal += (stringDigits(name) > 40) ? ERRMSG_NAME01 + "<br>"
+				: (stringDigits(name) == 0) ? ERRMSG_NAME02 + "<br>" : "";
+		returnVal += (stringDigits(address) > 80) ? ERRMSG_ADDRESS01 + "<br>"
+				: (stringDigits(address) == 0) ? ERRMSG_ADDRESS02 + "<br>" : "";
 		returnVal += (tel.equals("")) ? ""
 				: (tel.length() > 0 && tel.matches("^\\d{3}-\\d{4}-\\d{4}$")) ? ""
 						: ERRMSG_TEL01 + "<br>";
 
 		return returnVal;//チェックの結果を返す
+	}
+
+	public static int stringDigits(String s) {
+		char[] chars = s.toCharArray();
+		int digits = 0;
+		for (int i = 0; i < chars.length; i++) {
+			digits += (String.valueOf(chars[i]).getBytes().length < 2) ? 1 : 2;
+		}
+		return digits;
 	}
 
 	public ResultSet getCategoryAll() {
@@ -38,7 +47,7 @@ public class Common {
 		try {
 			//DBへ接続
 			Class.forName("com.mysql.cj.jdbc.Driver");
-			Connection connect = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+			Connection connect = DriverManager.getConnection(URL, USERNAME, PASSWORD2);
 			Statement stmt = connect.createStatement();
 			getQuery = "select categoryid,categoryname from category order by categoryid asc;";
 			ResultSet rs = stmt.executeQuery(getQuery);
@@ -60,7 +69,7 @@ public class Common {
 		try {
 			//DBへ接続
 			Class.forName("com.mysql.cj.jdbc.Driver");
-			Connection connect = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+			Connection connect = DriverManager.getConnection(URL, USERNAME, PASSWORD2);
 			stmt = connect.createStatement();
 			getQuery = "select categoryid,categoryname from category where categoryid=" + id + ";";
 			ResultSet rs = stmt.executeQuery(getQuery);

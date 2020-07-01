@@ -6,12 +6,7 @@
 	padding: 0;
 }
 
-head {
-	width: 960px;
-	margin: 0 auto;
-}
-
-body {
+hesd,body{
 	width: 960px;
 	margin: 0 auto;
 }
@@ -24,16 +19,15 @@ body {
 
 /*すべてに共通する部分　ここまで*/
 /*List　ここから*/
-navmenu{
-	height:200px;
-	margin:10px 0;
-
+.navmenu {
+	height: 100px;
+	margin: 10px 0;
 }
 
 table th, td {
 	width: 950px;
 	height: 50px;
-	border:1px solid #000;
+	border: 1px solid #000;
 }
 
 table th {
@@ -60,7 +54,7 @@ table th {
 }
 
 .tadresth:hover {
-	background-color: red;
+	background-color: green;
 	text-align: center;
 	padding: 3px 5px;
 }
@@ -83,7 +77,7 @@ table th {
 
 .tbtn {
 	display: block;
-	text-align:center;
+	text-align: center;
 }
 
 .serch {
@@ -102,14 +96,24 @@ table th {
 
 .addbtn {
 	width: 200px;
+	height:25px;
+	position: relative;
+	top:30px;
 }
 
 .navleft {
-	display:flex;
+	display: flex;
 	justify-content: space-between;
 }
 
 .navright {
+	float: right;
+}
+
+.navright p {
+	position: relative;
+	right:45px;
+	top:20px;
 }
 
 /*List　ここまで*/
@@ -120,6 +124,40 @@ table th {
 /*Delete　ここから*/
 /*Delete　ここまで*/
 /*Edit　ここから*/
+.text{
+	margin-bottom:20px;
+}
+.text input {
+	height: 20px;
+	width: 200px;
+	margin-bottom: 5px;
+}
+
+.text select {
+	height: 20px;
+	width: 200px;
+	margin-bottom: 5px;
+}
+
+.namebox {
+	position: relative;
+	left: 32px;
+}
+
+.adresbox {
+	position: relative;
+	left: 32px;
+}
+
+.editbtn {
+	textalign: center;
+	height: 25px;
+	width: 200px;
+}
+
+.returnbtn {
+	float: left;
+}
 /*Edit　ここまで*/
 /*EditCheck　ここから*/
 /*EditCheck　ここまで*/
