@@ -23,7 +23,6 @@ public class ListBL extends HttpServlet {
 	private static final String URL = "jdbc:mysql://localhost:3306/ishibashi?serverTimezone=JST";
 	private static final String USERNAME = "root";
 	private static final String PASSWORD = "";
-	private static final String PASSWORD2 = "ishi1196";
 
 	/**
 	 * @see HttpServlet#HttpServlet()
@@ -62,7 +61,7 @@ public class ListBL extends HttpServlet {
 
 			Class.forName("com.mysql.cj.jdbc.Driver");
 
-			connect = DriverManager.getConnection(URL, USERNAME, PASSWORD2);
+			connect = DriverManager.getConnection(URL, USERNAME, PASSWORD);
 			stmt = connect.createStatement();
 
 			//住所検索があったかどうかを調べる

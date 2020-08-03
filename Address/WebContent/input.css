@@ -1,0 +1,50 @@
+@charset "UTF-8";
+* {
+	margin: 0;
+	padding: 0;
+}
+
+hesd,body{
+	width: 960px;
+	margin: 0 auto;
+}
+
+.btn {
+	background-color: #777777;
+	border: 1px solid #000;
+	padding: 3px 5px;
+}
+.text{
+	margin-bottom:20px;
+}
+.text input {
+	height: 20px;
+	width: 200px;
+	margin-bottom: 5px;
+}
+
+.text select {
+	height: 20px;
+	width: 200px;
+	margin-bottom: 5px;
+}
+
+.namebox {
+	position: relative;
+	left: 32px;
+}
+
+.adresbox {
+	position: relative;
+	left: 32px;
+}
+
+.editbtn {
+	textalign: center;
+	height: 25px;
+	width: 200px;
+}
+
+.returnbtn {
+	float: left;
+}

@@ -1,0 +1,16 @@
+@charset "UTF-8";
+* {
+	margin: 0;
+	padding: 0;
+}
+
+hesd,body{
+	width: 960px;
+	margin: 0 auto;
+}
+
+.btn {
+	background-color: #777777;
+	border: 1px solid #000;
+	padding: 3px 5px;
+}

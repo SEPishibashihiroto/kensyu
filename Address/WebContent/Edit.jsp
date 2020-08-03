@@ -31,7 +31,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="input.css">
 <title>編集画面</title>
 </head>
 <body>

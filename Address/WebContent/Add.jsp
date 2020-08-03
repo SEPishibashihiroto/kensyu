@@ -35,7 +35,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="input.css">
 <title>住所録登録</title>
 </head>
 <body>

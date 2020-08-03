@@ -16,7 +16,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="list.css">
 <title>住所録一覧</title>
 </head>
 <body>

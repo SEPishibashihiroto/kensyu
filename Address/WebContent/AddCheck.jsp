@@ -15,7 +15,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="check.css">
 <title>追加確認画面</title>
 </head>
 <body>

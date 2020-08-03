@@ -10,7 +10,6 @@ public class Common {
 	private static final String URL = "jdbc:mysql://localhost:3306/ishibashi?serverTimezone=JST";
 	private static final String USERNAME = "root";
 	private static final String PASSWORD = "";
-	private static final String PASSWORD2 = "ishi1196";
 
 	public static String getErr(String name, String address, String tel) {
 		//エラー内容の宣言
@@ -47,7 +46,7 @@ public class Common {
 		try {
 			//DBへ接続
 			Class.forName("com.mysql.cj.jdbc.Driver");
-			Connection connect = DriverManager.getConnection(URL, USERNAME, PASSWORD2);
+			Connection connect = DriverManager.getConnection(URL, USERNAME, PASSWORD);
 			Statement stmt = connect.createStatement();
 			getQuery = "select categoryid,categoryname from category order by categoryid asc;";
 			ResultSet rs = stmt.executeQuery(getQuery);
@@ -69,7 +68,7 @@ public class Common {
 		try {
 			//DBへ接続
 			Class.forName("com.mysql.cj.jdbc.Driver");
-			Connection connect = DriverManager.getConnection(URL, USERNAME, PASSWORD2);
+			Connection connect = DriverManager.getConnection(URL, USERNAME, PASSWORD);
 			stmt = connect.createStatement();
 			getQuery = "select categoryid,categoryname from category where categoryid=" + id + ";";
 			ResultSet rs = stmt.executeQuery(getQuery);
