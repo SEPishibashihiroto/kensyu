@@ -51,7 +51,7 @@ public class DeleteCommitBL extends HttpServlet {
 		tel = (tel.equals("")) ? tel : tel.replace("-", "");
 
 		//SQL文の作成
-		UpdQuery = "update `jyusyoroku` set `delete_flg` = '" + 1 + "' where `jyusyoroku`.`id` = " + id + ";";
+		UpdQuery = "update `jyusyo` set `delete_flg` = '" + 1 + "' where `jyusyoroku`.`id` = " + id + ";";
 
 		try {
 			//DBへ接続

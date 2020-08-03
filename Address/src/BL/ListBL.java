@@ -76,18 +76,18 @@ public class ListBL extends HttpServlet {
 				rs.close();
 
 				//住所検索がなかった場合全データを1ページに10件ずつ表示
-				SelectQuery = "select id,name,address,tel,categoryname from jyusyoroku join category on jyusyoroku.categoryid = category.categoryid where delete_flg = 0  order by id asc limit "
+				SelectQuery = "select id,name,address,tel,categoryname from jyusyo join category on jyusyo.categoryid = category.categoryid where delete_flg = 0  order by id asc limit "
 						+ limitSta + ",10;";
 			} else {
 
 				//住所検索があった場合検索結果を1ページに10件ずつ表示
 				SerchName = "'%" + senarq + "%'";
-				SelectQuery = "select id,name,address,tel,categoryname from jyusyoroku join category on jyusyoroku.categoryid = category.categoryid where address like "
+				SelectQuery = "select id,name,address,tel,categoryname from jyusyo join category on jyusyo.categoryid = category.categoryid where address like "
 						+ SerchName
 						+ " and delete_flg = 0 order by id asc  limit " + limitSta + ",10;";
 
 				//データが何件あるかを調べるSQL
-				CntQuery = "select count(*) as cnt from jyusyoroku join category on jyusyoroku.categoryid = category.categoryid where address like "
+				CntQuery = "select count(*) as cnt from jyusyo join category on jyusyo.categoryid = category.categoryid where address like "
 						+ SerchName +
 						" and delete_flg = 0 order by id asc;";
 				rs = stmt.executeQuery(CntQuery);

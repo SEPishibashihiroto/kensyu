@@ -53,7 +53,7 @@ public class AddCommitBL extends HttpServlet {
 		tel = (tel.equals("")) ? tel : tel.replace("-", "");
 
 		//SQL文の作成
-		InsQuery = "insert into `jyusyoroku` (`id`, `name`, `address`, `tel`, `categoryid`, `delete_flg`) values (null, '"
+		InsQuery = "insert into `jyusyo` (`id`, `name`, `address`, `tel`, `categoryid`, `delete_flg`) values (null, '"
 				+ name + "', '" + address + "', '" + tel + "', '" + categoryid + "', '0');";
 
 		try {

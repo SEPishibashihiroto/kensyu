@@ -34,7 +34,7 @@
 		<div class="navright">
 			<!-- 住所を検索し、絞り込むためのテキストボックス、ボタン -->
 			<form action="./ListBL">
-				<p>住所：</p>
+				<span>検索：</span>
 				<input type="text" name="SerchName" class="serchtext"><br>
 				<input type="submit" value="検索" class="serch">
 			</form>

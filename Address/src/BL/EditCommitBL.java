@@ -53,7 +53,7 @@ public class EditCommitBL extends HttpServlet {
 		tel = (tel.equals("")) ? tel : tel.replace("-", "");
 
 		//SQL文の作成
-		UpdQuery = "update `jyusyoroku` set `name` = '" + name + "', `address` = '" + address + "', `tel` = '" + tel
+		UpdQuery = "update `jyusyo` set `name` = '" + name + "', `address` = '" + address + "', `tel` = '" + tel
 				+ "', `categoryid` = '" + categoryid + "' where `jyusyoroku`.`id` = " + id + ";";
 
 		try {
